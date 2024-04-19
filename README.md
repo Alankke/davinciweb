@@ -1,16 +1,11 @@
-# davinciweb
+# Título E-commerce Óptica DaVinci
 
-A new Flutter project.
+    E-commerce para una óptica en el 
+    que se podrá visualizar los marcos,
+    lentes de contacto y anteojos de sol
+    que tienen disponibles
+    
 
-## Getting Started
+## **Stack de tecnologías**
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img src="https://github.com/Alankke/davinciweb/assets/101530380/1e78b262-a95c-4f08-b273-4de1c543e03a" alt="Flutter" title="Flutter" height=60/> <img src="https://github.com/Alankke/davinciweb/assets/101530380/e4559722-8b27-446f-97d6-422925419fa0" alt="Firebase" title="Firebase" height=60/> <img src="https://github.com/Alankke/davinciweb/assets/101530380/242278c6-d919-4084-8f85-1bb2004e330e" alt="Dart"  title="Dart" height=60/>
