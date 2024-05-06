@@ -1,9 +1,27 @@
 class DaVinciValidator {
+
+  static String? validateEmptyText(String? fieldname, String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Debes proporcionar un $fieldname';
+    }
+    
+    return null;
+  }
+
+  static String? validateUsername(String? username){
+    return (username == null || username.isEmpty)
+      ? 'Debes proporcionar un nombre de usuario'
+      : (!RegExp(r'^[a-zA-Z0-9_-]{3,20}$').hasMatch(username))
+        ? 'Nombre de usuario incorrecto'
+        : (username.startsWith('_') || username.startsWith('-') || username.endsWith('_') || username.endsWith('-'))
+          ? 'El nombre de usuario no puede comenzar ni terminar con guiones'
+          : null;
+  }
+
   static String? validateEmail(String? email) {
     return (email == null || email.isEmpty)
         ? 'Debes proporcionar un email'
-        : (!RegExp(r'^[a-zA-Z0-9.a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$')
-                .hasMatch(email))
+        : (!RegExp(r'^[a-zA-Z0-9.a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$').hasMatch(email))
             ? 'Email incorrecto'
             : null;
   }
@@ -20,13 +38,5 @@ class DaVinciValidator {
                     : (!password.contains(RegExp(r'[!@#$%&*(),.?":{}|<>]')))
                         ? 'La contraseña debe tener mínimo un carácter especial'
                         : null;
-  }
-
-  static String? validatePhoneNumber(String? phoneNumber) {
-    return (phoneNumber == null || phoneNumber.isEmpty)
-        ? 'Debes proporcionar un teléfono'
-        : (!RegExp(r'^\+54\d{10}$').hasMatch(phoneNumber))
-            ? 'Teléfono incorrecto'
-            : null;
   }
 }
