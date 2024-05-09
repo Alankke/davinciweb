@@ -61,5 +61,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'davinciweb-3e35f.appspot.com',
     measurementId: 'G-CG85771Q05',
   );
-
 }

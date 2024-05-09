@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 
-class DaVinciColors{
+class DaVinciColors {
   //Constructor
   DaVinciColors._();
 
   static const Color primary = Color(0xFF4B68FF);
   static const Color secondary = Color(0xFFFFE24B);
   static const Color accent = Color(0xFFB0C7FF);
+
+  static const Color brightPink = Color(0xFFEf476F);
+  static const Color sunglow = Color(0xFFFFD166);
+  static const Color emeraldGreen = Color(0xFF06D6A0);
+  static const Color navyBlue = Color(0xFF118AB2);
+  static const Color midnight = Color(0xFF073B4C);
 
   static const Color textPrimary = Color(0xFF333333);
   static const Color textSecondary = Color(0xFF6C757D);
