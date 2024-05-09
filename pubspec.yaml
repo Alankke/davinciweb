@@ -48,11 +48,16 @@ flutter:
     - assets/images/
     - assets/logos/
 
+  fonts:
+    - family: Playfair
+      fonts:
+        - asset: assets/fonts/PlayfairDisplay-Regular.ttf
+
 #------------------Splash Screen------------------#
 flutter_native_splash:
   android: false
   ios: false
   web: true
   color: "#E2EDF1"
-  image: "assets/logos/davinciLogo.png"
+  image: "assets/logos/davinciLogoRounded.png"
   web_image_mode: center
