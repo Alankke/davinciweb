@@ -2,7 +2,7 @@
 
 import 'package:davinciweb/data/repositories/auth/authentication_repository.dart';
 import 'package:davinciweb/data/repositories/user/user_repository.dart';
-import 'package:davinciweb/features/personalization/models/user_model.dart';
+import 'package:davinciweb/features/authentication/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
