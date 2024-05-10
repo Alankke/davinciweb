@@ -1,9 +1,11 @@
+// ignore_for_file: avoid_print
+
 import 'package:davinciweb/data/repositories/auth/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-class LogInController extends GetxController{
+class LogInController extends GetxController {
   static LogInController get instance => Get.find();
 
   //Form
@@ -16,15 +18,14 @@ class LogInController extends GetxController{
   GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
 
   Future<void> emailAndPasswordSignIn() async {
-    try{
-
+    try {
       if (!loginFormKey.currentState!.validate()) return;
 
-      final userData = await AuthenticationRepository.instance.loginWithEmailAndPassword(email.text.trim(), password.text.trim());
-      
-      print('Inicio de sesión exitoso');
+      await AuthenticationRepository.instance
+          .loginWithEmailAndPassword(email.text.trim(), password.text.trim());
 
-    } catch (e){
+      print('Inicio de sesión exitoso');
+    } catch (e) {
       print('Error en el inicio de sesión $e');
     }
   }

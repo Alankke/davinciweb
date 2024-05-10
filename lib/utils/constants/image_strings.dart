@@ -1,4 +1,4 @@
-class DaVinciImages{
+class DaVinciImages {
   DaVinciImages._();
 
   //Logos

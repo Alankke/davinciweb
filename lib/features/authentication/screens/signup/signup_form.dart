@@ -1,4 +1,4 @@
-import 'package:davinciweb/common/widgets/space_input_fields.dart';
+import 'package:davinciweb/common/widgets/custom_shapes/space_input_fields.dart';
 import 'package:davinciweb/features/authentication/controllers/signup/signup_controller.dart';
 import 'package:davinciweb/utils/constants/colors.dart';
 import 'package:davinciweb/utils/constants/sizes.dart';
@@ -16,8 +16,8 @@ class SignUpForm extends StatelessWidget {
     final controller = Get.put(SignUpController());
     return Container(
       constraints: const BoxConstraints(maxWidth: 300),
-      child: Form(  
-        key: controller.signupFormKey,      
+      child: Form(
+        key: controller.signupFormKey,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -36,7 +36,8 @@ class SignUpForm extends StatelessWidget {
             //Nombre
             TextFormField(
               controller: controller.name,
-              validator: (value) => DaVinciValidator.validateEmptyText('Nombre', value),
+              validator: (value) =>
+                  DaVinciValidator.validateEmptyText('Nombre', value),
               decoration: const InputDecoration(
                 labelText: 'Nombre completo',
                 prefixIcon: Icon(Icons.person_outline),
@@ -47,12 +48,12 @@ class SignUpForm extends StatelessWidget {
             //Username
             TextFormField(
               controller: controller.username,
-              validator:(value) => DaVinciValidator.validateUsername(value),
+              validator: (value) => DaVinciValidator.validateUsername(value),
               decoration: const InputDecoration(
-                  labelText: 'Nombre de usuario',
-                  prefixIcon: Icon(Icons.text_fields_outlined),
-                  border: OutlineInputBorder(),
-                  ),
+                labelText: 'Nombre de usuario',
+                prefixIcon: Icon(Icons.text_fields_outlined),
+                border: OutlineInputBorder(),
+              ),
             ),
             spaceInputFields(),
             //Password
@@ -62,13 +63,16 @@ class SignUpForm extends StatelessWidget {
                 obscureText: controller.hidePassword.value,
                 validator: (value) => DaVinciValidator.validatePassword(value),
                 decoration: InputDecoration(
-                    labelText: 'Contraseña',
-                    prefixIcon: const Icon(Icons.lock_outline_rounded),
-                    border: const OutlineInputBorder(),
-                    suffixIcon: IconButton(
-                      onPressed: () =>  controller.hidePassword.value = !controller.hidePassword.value,
-                      icon: Icon(controller.hidePassword.value ?  Icons.visibility_off_outlined : Icons.visibility_outlined )),
-                    ),
+                  labelText: 'Contraseña',
+                  prefixIcon: const Icon(Icons.lock_outline_rounded),
+                  border: const OutlineInputBorder(),
+                  suffixIcon: IconButton(
+                      onPressed: () => controller.hidePassword.value =
+                          !controller.hidePassword.value,
+                      icon: Icon(controller.hidePassword.value
+                          ? Icons.visibility_off_outlined
+                          : Icons.visibility_outlined)),
+                ),
               ),
             ),
             spaceInputFields(),
@@ -76,23 +80,22 @@ class SignUpForm extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: DaVinciColors.buttonSecondary,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4)),
-                ),
-                child: const Padding(
-                  padding: EdgeInsets.all(10.0),
-                  child: Text(
-                    'Registrarte',
-                    style: TextStyle(
-                      fontSize: DaVinciSizes.fontSizeMd,
-                      fontWeight: FontWeight.bold,
-                      color: DaVinciColors.textPrimary),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: DaVinciColors.buttonSecondary,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4)),
                   ),
-                ),
-                onPressed: () => controller.signup()
-              ),
+                  child: const Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: Text(
+                      'Registrarte',
+                      style: TextStyle(
+                          fontSize: DaVinciSizes.fontSizeMd,
+                          fontWeight: FontWeight.bold,
+                          color: DaVinciColors.textPrimary),
+                    ),
+                  ),
+                  onPressed: () => controller.signup()),
             ),
           ],
         ),

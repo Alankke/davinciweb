@@ -7,16 +7,14 @@ class UserModel {
   final String email;
   String profilePicture;
 
+  UserModel(
+      {required this.id,
+      required this.name,
+      required this.username,
+      required this.email,
+      required this.profilePicture});
 
-  UserModel({
-    required this.id,
-    required this.name,
-    required this.username,
-    required this.email,
-    required this.profilePicture
-  });
-
-  Map<String, dynamic> toJson(){
+  Map<String, dynamic> toJson() {
     return {
       'Name': name,
       'Username': username,
@@ -25,10 +23,12 @@ class UserModel {
     };
   }
 
-  static UserModel emptyUser() => UserModel(id: '', name: '', username: '', email: '', profilePicture: '');
+  static UserModel emptyUser() =>
+      UserModel(id: '', name: '', username: '', email: '', profilePicture: '');
 
-  factory UserModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document){
-    if(document.data() != null){
+  factory UserModel.fromSnapshot(
+      DocumentSnapshot<Map<String, dynamic>> document) {
+    if (document.data() != null) {
       final data = document.data()!;
       return UserModel(
         id: document.id,
@@ -37,9 +37,8 @@ class UserModel {
         email: data['Email'] ?? '',
         profilePicture: data['ProfilePicture'] ?? '',
       );
-    }else {
+    } else {
       return emptyUser();
     }
   }
-
 }

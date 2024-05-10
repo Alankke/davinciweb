@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:davinciweb/features/personalization/models/user_model.dart';
 import 'package:get/get.dart';
@@ -12,7 +14,8 @@ class UserRepository extends GetxController {
       await _db.collection("Users").doc(user.id).set(user.toJson());
     } on FirebaseException catch (e) {
       print('Error de Firebase $e');
-      throw FirebaseException(code: e.code, message: 'Error en Firebase', plugin: e.plugin);
+      throw FirebaseException(
+          code: e.code, message: 'Error en Firebase', plugin: e.plugin);
     } on FormatException catch (_) {
       print("Error de FormatException $_");
       throw const FormatException();
