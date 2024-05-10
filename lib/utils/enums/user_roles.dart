@@ -1,0 +1,4 @@
+enum UserRoles{
+  cliente,
+  administrador
+}

@@ -1,9 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
-class AuthenticationRepository {
+class AuthenticationRepository extends GetxController{
   static AuthenticationRepository get instance => Get.find();
   final _auth = FirebaseAuth.instance;
+
+  User? get authUser => _auth.currentUser;
 
   //Crear cuenta
   Future<UserCredential> registerWithEmailAndPassword(
