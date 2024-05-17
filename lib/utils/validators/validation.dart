@@ -3,7 +3,6 @@ class DaVinciValidator {
     if (value == null || value.isEmpty) {
       return 'Debes proporcionar un $fieldname';
     }
-
     return null;
   }
 

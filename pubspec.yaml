@@ -18,16 +18,17 @@ dependencies:
   intl: ^0.18.1
   logger: ^2.0.1
   url_launcher: ^6.1.12
-  
+  image_picker: ^1.1.1
   
   #-------Iconos-------#
   cupertino_icons: ^1.0.2
 
   #-------Firebase-------#
-  firebase_core: ^2.27.0
-  firebase_auth: ^4.17.8
-  cloud_firestore: ^4.15.8
-
+  firebase_core: ^2.31.0
+  firebase_auth: ^4.19.5
+  cloud_firestore: ^4.17.3
+  firebase_storage: ^11.7.5
+  
   #-------Manejo de estados de widgets-------#
   get: ^4.6.5
   get_storage: ^2.1.1
@@ -35,7 +36,7 @@ dependencies:
 #-------Flutter-------#
 dev_dependencies:
   flutter_test:
-    sdk: flutter  
+    sdk: flutter
   flutter_lints: ^3.0.2
   flutter_native_splash: ^2.3.10
 

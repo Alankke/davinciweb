@@ -14,25 +14,25 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-        backgroundColor: DaVinciColors.midnight,
-        automaticallyImplyLeading: false,
-        flexibleSpace: const Header(),
-        leading: IconButton(
+      backgroundColor: DaVinciColors.midnight,
+      automaticallyImplyLeading: false,
+      flexibleSpace: const Header(),
+      leading: IconButton(
           onPressed: () => Get.back(),
           icon: const Icon(Icons.arrow_back, color: DaVinciColors.light)),
-        actions: <Widget>[
-          //Iniciar Sesión
-          TextButton(
-              onPressed: () => Get.to(const LogIn()),
-              child: const Text('Iniciar sesión',
-                  style: DaVinciTextStyles.appBarTextStyleMd)),
-          //Crear cuenta
-          TextButton(
-              onPressed: () => Get.to(const SignUp()),
-              child: const Text('Crear cuenta',
-                  style: DaVinciTextStyles.appBarTextStyleMd)),
-        ],
-        bottom: PreferredSize(
+      actions: <Widget>[
+        //Iniciar Sesión
+        TextButton(
+            onPressed: () => Get.to(const LogIn()),
+            child: const Text('Iniciar sesión',
+                style: DaVinciTextStyles.appBarTextStyleMd)),
+        //Crear cuenta
+        TextButton(
+            onPressed: () => Get.to(const SignUp()),
+            child: const Text('Crear cuenta',
+                style: DaVinciTextStyles.appBarTextStyleMd)),
+      ],
+      bottom: PreferredSize(
           preferredSize: preferredSize,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: DaVinciSizes.md),
@@ -70,8 +70,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                         style: DaVinciTextStyles.appBarTextStyleSm))
               ],
             ),
-          )
-        ),
+          )),
     );
   }
 

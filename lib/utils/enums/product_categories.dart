@@ -1,7 +1,7 @@
-enum ProductCategories{
+enum ProductCategory {
   anteojosDeReceta,
   anteojosDeSol,
   accesorios,
   lentesDeContacto,
-  noCategory  
+  noCategory
 }

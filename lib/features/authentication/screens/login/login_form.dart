@@ -1,4 +1,3 @@
-import 'package:davinciweb/common/widgets/custom_shapes/space_input_fields.dart';
 import 'package:davinciweb/features/authentication/controllers/login/login_controller.dart';
 import 'package:davinciweb/utils/constants/colors.dart';
 import 'package:davinciweb/utils/constants/sizes.dart';
@@ -34,7 +33,7 @@ class LogInForm extends StatelessWidget {
                 border: OutlineInputBorder(),
               ),
             ),
-            spaceInputFields(),
+            const SizedBox(height: DaVinciSizes.spaceBtwItems / 2),
             //password
             Obx(
               () => TextFormField(
@@ -55,7 +54,7 @@ class LogInForm extends StatelessWidget {
                 ),
               ),
             ),
-            spaceInputFields(),
+            const SizedBox(height: DaVinciSizes.spaceBtwItems / 2),
             //button
             SizedBox(
               width: double.infinity,

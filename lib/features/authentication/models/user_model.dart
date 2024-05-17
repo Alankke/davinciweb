@@ -1,12 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:davinciweb/utils/enums/user_roles.dart';
 
 class UserModel {
   final String id;
   final String name;
   final String username;
   final String email;
-  final UserRoles role;
+  final String role;
   String profilePicture;
 
   UserModel(
@@ -27,12 +26,19 @@ class UserModel {
       'ProfilePicture': profilePicture
     };
   }
-  
+
   //Función para crear usuario vacío
-  static UserModel emptyUser() => UserModel(id: '', name: '', username: '', email: '', profilePicture: '', role: UserRoles.cliente);
+  static UserModel emptyUser() => UserModel(
+      id: '',
+      name: '',
+      username: '',
+      email: '',
+      profilePicture: '',
+      role: 'cliente');
 
   //Función para crear un UserModel desde un documento(registro) de Firebase
-  factory UserModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
+  factory UserModel.fromSnapshot(
+      DocumentSnapshot<Map<String, dynamic>> document) {
     if (document.data() != null) {
       final data = document.data()!;
       return UserModel(

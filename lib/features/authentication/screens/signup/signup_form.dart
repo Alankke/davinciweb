@@ -1,4 +1,3 @@
-import 'package:davinciweb/common/widgets/custom_shapes/space_input_fields.dart';
 import 'package:davinciweb/features/authentication/controllers/signup/signup_controller.dart';
 import 'package:davinciweb/utils/constants/colors.dart';
 import 'package:davinciweb/utils/constants/sizes.dart';
@@ -14,6 +13,7 @@ class SignUpForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(SignUpController());
+
     return Container(
       constraints: const BoxConstraints(maxWidth: 300),
       child: Form(
@@ -32,7 +32,7 @@ class SignUpForm extends StatelessWidget {
                 border: OutlineInputBorder(),
               ),
             ),
-            spaceInputFields(),
+            const SizedBox(height: DaVinciSizes.spaceBtwItems / 2),
             //Nombre
             TextFormField(
               controller: controller.name,
@@ -44,7 +44,7 @@ class SignUpForm extends StatelessWidget {
                 border: OutlineInputBorder(),
               ),
             ),
-            spaceInputFields(),
+            const SizedBox(height: DaVinciSizes.spaceBtwItems / 2),
             //Username
             TextFormField(
               controller: controller.username,
@@ -55,7 +55,7 @@ class SignUpForm extends StatelessWidget {
                 border: OutlineInputBorder(),
               ),
             ),
-            spaceInputFields(),
+            const SizedBox(height: DaVinciSizes.spaceBtwItems / 2),
             //Password
             Obx(
               () => TextFormField(
@@ -75,25 +75,14 @@ class SignUpForm extends StatelessWidget {
                 ),
               ),
             ),
-            spaceInputFields(),
+            const SizedBox(height: DaVinciSizes.spaceBtwItems / 2),
             //button
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: DaVinciColors.buttonSecondary,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(4)),
-                  ),
                   child: const Padding(
                     padding: EdgeInsets.all(10.0),
-                    child: Text(
-                      'Registrarte',
-                      style: TextStyle(
-                          fontSize: DaVinciSizes.fontSizeMd,
-                          fontWeight: FontWeight.bold,
-                          color: DaVinciColors.textPrimary),
-                    ),
+                    child: Text('Registrarte'),
                   ),
                   onPressed: () => controller.signup()),
             ),

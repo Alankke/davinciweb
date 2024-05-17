@@ -3,9 +3,9 @@ import 'package:davinciweb/utils/enums/product_categories.dart';
 
 class ProductModel {
   final String id;
-  final String name;
-  final double price;
-  final ProductCategories category;
+  String name;
+  double price;
+  ProductCategory category;
   String picture;
 
   ProductModel(
@@ -24,22 +24,37 @@ class ProductModel {
     };
   }
 
-  static ProductModel emptyProduct() =>
-      ProductModel(id: '', name: '', price: 0, category: ProductCategories.noCategory, picture: '');
+  static ProductModel emptyProduct() => ProductModel(
+      id: '',
+      name: '',
+      price: 0,
+      category: ProductCategory.noCategory,
+      picture: '');
 
   factory ProductModel.fromSnapshot(
       DocumentSnapshot<Map<String, dynamic>> document) {
+    final data = document.data()!;
     if (document.data() != null) {
-      final data = document.data()!;
       return ProductModel(
         id: document.id,
         name: data['Name'] ?? '',
-        price: data['Price'] ?? '',
-        category: data['Category'] ?? '',
+        price: double.parse((data['Price'] ?? 0.0).toString()),
+        category: data['Category'] ?? ProductCategory.noCategory,
         picture: data['Picture'] ?? '',
       );
     } else {
-      return emptyProduct();
+      return ProductModel.emptyProduct();
     }
+  }
+
+  factory ProductModel.fromJson(Map<String, dynamic> json) {
+    return ProductModel(
+        id: json['id'],
+        name: json['Name'],
+        price: json['Price'].toDouble(),
+        // ignore: prefer_interpolation_to_compose_strings
+        category: ProductCategory.values.firstWhere((element) =>
+            element.toString() == 'ProductCategory.' + json['Category']),
+        picture: json['Picture']);
   }
 }
