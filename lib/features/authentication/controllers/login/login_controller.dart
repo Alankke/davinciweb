@@ -1,6 +1,6 @@
 // ignore_for_file: avoid_print
 import 'package:davinciweb/data/repositories/auth/authentication_repository.dart';
-import 'package:davinciweb/data/services/auth.dart';
+import 'package:davinciweb/data/services/user.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -24,7 +24,7 @@ class LogInController extends GetxController {
       await AuthenticationRepository.instance
           .loginWithEmailAndPassword(email.text.trim(), password.text.trim())
           .then((user) {
-        AuthService.instance.checkUserType();
+        UserService.instance.getUserRole();
       });
       print('Inicio de sesión exitoso');
     } catch (e) {
