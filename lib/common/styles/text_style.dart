@@ -38,6 +38,11 @@ class DaVinciTextStyles {
       fontSize: DaVinciSizes.xl,
       fontFamily: 'Playfair');
 
+  static const TextStyle homeLarge = TextStyle(
+      color: DaVinciColors.textPrimary,
+      fontSize: DaVinciSizes.xl,
+      fontFamily: 'Playfair');
+
   static const TextStyle headlineLargeDark = TextStyle(
       color: DaVinciColors.dark,
       fontSize: DaVinciSizes.fontSizeLg,

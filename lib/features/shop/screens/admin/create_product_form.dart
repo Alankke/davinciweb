@@ -39,7 +39,7 @@ class CreateProductForm extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      onPressed: controller.selectPicture,
+                      onPressed: () => controller.selectPicture(),
                       child: Obx(() {
                         final networkImage = controller.product.value.picture;
                         return networkImage.isEmpty
