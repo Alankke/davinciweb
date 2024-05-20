@@ -53,6 +53,9 @@ flutter:
     - family: Playfair
       fonts:
         - asset: assets/fonts/PlayfairDisplay-Regular.ttf
+    - family: Merriweather
+      fonts:
+        - asset: assets/fonts/MerriweatherSans-Regular.ttf
 
 #------------------Splash Screen------------------#
 flutter_native_splash:

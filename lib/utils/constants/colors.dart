@@ -23,7 +23,7 @@ class DaVinciColors {
   static const Color primaryBackground = Color(0xFFF3F5FF);
 
   static const Color lightContainer = Color(0xFFF6F6F6);
-  static Color darkContainer = Colors.white.withOpacity(0.1);
+  static Color darkContainer = Colors.black.withOpacity(0.1);
 
   static const Color buttonPrimary = Color.fromARGB(248, 168, 19, 19);
   static const Color buttonSecondary = Color(0xFF4B68FF);

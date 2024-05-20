@@ -63,4 +63,10 @@ class DaVinciTextStyles {
       color: DaVinciColors.textPrimary,
       fontSize: DaVinciSizes.fontSizeLg,
       fontFamily: 'Playfair');
+
+  static const TextStyle FooterTitle = TextStyle(
+      fontWeight: FontWeight.bold,
+      color: DaVinciColors.textPrimary,
+      fontSize: DaVinciSizes.md,
+      fontFamily: 'Merriweather');
 }

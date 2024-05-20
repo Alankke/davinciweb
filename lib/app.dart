@@ -17,7 +17,7 @@ class App extends StatelessWidget {
         builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return CircularProgressIndicator();
-          } else if (snapshot.hasError){
+          } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else if (snapshot.data == 'admin') {
             return const AdminHome();
