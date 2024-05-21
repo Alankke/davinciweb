@@ -7,11 +7,12 @@ class UserService {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _db = FirebaseFirestore.instance;
-  
+
   Future<String?> getUserRole() async {
     User? user = _auth.currentUser;
     if (user != null) {
-      DocumentSnapshot docSnapshot = await _db.collection('users').doc(user.uid).get();
+      DocumentSnapshot docSnapshot =
+          await _db.collection('Users').doc(user.uid).get();
       return docSnapshot['Role'];
     }
     return null;

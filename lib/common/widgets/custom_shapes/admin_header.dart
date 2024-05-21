@@ -1,4 +1,4 @@
-import 'package:davinciweb/common/styles/text_style.dart';
+import 'package:davinciweb/utils/constants/text_style.dart';
 import 'package:flutter/material.dart';
 
 class AdminHeader extends StatelessWidget {

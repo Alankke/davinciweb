@@ -1,4 +1,4 @@
-import 'package:davinciweb/common/styles/text_style.dart';
+import 'package:davinciweb/utils/constants/text_style.dart';
 import 'package:davinciweb/common/widgets/custom_shapes/header.dart';
 import 'package:davinciweb/features/authentication/screens/login/login.dart';
 import 'package:davinciweb/features/authentication/screens/signup/signup.dart';

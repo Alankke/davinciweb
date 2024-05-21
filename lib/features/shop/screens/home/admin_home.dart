@@ -1,4 +1,4 @@
-import 'package:davinciweb/common/styles/text_style.dart';
+import 'package:davinciweb/utils/constants/text_style.dart';
 import 'package:davinciweb/common/widgets/appbar/admin_appbar.dart';
 import 'package:davinciweb/features/shop/screens/admin/create_product.dart';
 import 'package:davinciweb/features/shop/screens/home/home.dart';

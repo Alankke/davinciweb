@@ -1,4 +1,4 @@
-import 'package:davinciweb/common/styles/text_style.dart';
+import 'package:davinciweb/utils/constants/text_style.dart';
 import 'package:davinciweb/common/widgets/custom_shapes/circular_container.dart';
 import 'package:davinciweb/common/widgets/custom_shapes/circular_image.dart';
 import 'package:davinciweb/features/shop/models/product_model.dart';
