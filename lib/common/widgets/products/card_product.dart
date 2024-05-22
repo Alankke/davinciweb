@@ -34,30 +34,31 @@ class ProductCard extends StatelessWidget {
         child: Column(
           children: [
             //Imagen
-            CircularContainer(
-                height: 180,
-                padding: const EdgeInsets.all(DaVinciSizes.sm),
-                backgroundColor: DaVinciColors.light,
-                child: CircularImage(
-                    imageUrl: product.picture, applyImageRadius: true)),
+             CircularImage(
+              fit: BoxFit.fill,
+              imageUrl: product.picture,
+              applyImageRadius: true,
+              width: 180,
+              height: 180,
+            ),
             //Detalles
             Padding(
               padding: const EdgeInsets.only(left: DaVinciSizes.sm),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Nombre',
+                  Text(
+                    product.name,
                     style: DaVinciTextStyles.detailsMd,
                   ),
                   const SizedBox(height: DaVinciSizes.spaceBtwItems / 2),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text('\$00.0',
+                      Text('\$${product.price.toStringAsFixed(2)}',
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: DaVinciTextStyles.headlineMedium),
+                          style: DaVinciTextStyles.detailsMd),
                       Container(
                         decoration: const BoxDecoration(
                             color: DaVinciColors.dark,

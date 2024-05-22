@@ -1,9 +1,8 @@
-import 'package:davinciweb/utils/constants/text_style.dart';
+import 'package:davinciweb/features/shop/models/product_model.dart';
 import 'package:davinciweb/common/widgets/appbar/appbar.dart';
 import 'package:davinciweb/common/widgets/custom_shapes/footer.dart';
 import 'package:davinciweb/common/widgets/products/card_product.dart';
 import 'package:davinciweb/features/shop/controllers/products/product_controller.dart';
-import 'package:davinciweb/features/shop/screens/store/custom_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,33 +12,45 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(ProductController());
+
     return Scaffold(
-        appBar: const HomeAppBar(),
-        body: Center(
-          child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Obx(() {
-                    if (controller.fetchedProducts.isEmpty) {
-                      return const Center(
-                        child: Text(
-                          'No se encontraron productos',
-                          style: DaVinciTextStyles.homeLarge,
-                        ),
-                      );
-                    }
-                    return Container(
-                      child: CustomGridView(
-                          itemCount: controller.fetchedProducts.length,
-                          itemBuilder: (_, index) => ProductCard(
-                              product: controller.fetchedProducts[index])),
-                    );
-                  }),
-                  Footer()
-                ],
-              )),
-        ));
+      appBar: const HomeAppBar(),
+      body: Column(
+        children: [
+          Expanded(
+            child: FutureBuilder<List<ProductModel>>(
+              future: controller.fetchProducts(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  print(snapshot.error);
+                  return const Center(child: Text('Error al cargar productos'));
+                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                  return const Center(child: Text('Cargando productos, vuelva más tarde'));
+                } else {
+                  final products = snapshot.data!;
+
+                  return GridView.builder(
+                    gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 200,
+                      childAspectRatio: 3 / 2,
+                      crossAxisSpacing: 20,
+                      mainAxisSpacing: 20,
+                    ),
+                    itemCount: products.length,
+                    itemBuilder: (BuildContext context, index) {
+                      final product = products[index];
+                      return ProductCard(product: product);
+                    },
+                  );
+                }
+              },
+            ),
+          ),
+          Footer()
+        ],
+      ),
+    );
   }
 }

@@ -49,7 +49,7 @@ class DaVinciTextStyles {
       fontFamily: 'Playfair');
 
   static const TextStyle detailsMd = TextStyle(
-      color: DaVinciColors.textWhite,
+      color: DaVinciColors.textPrimary,
       fontSize: DaVinciSizes.fontSizeMd,
       fontFamily: 'Playfair');
 
@@ -64,7 +64,7 @@ class DaVinciTextStyles {
       fontSize: DaVinciSizes.fontSizeLg,
       fontFamily: 'Playfair');
 
-  static const TextStyle FooterTitle = TextStyle(
+  static const TextStyle footerTitle = TextStyle(
       fontWeight: FontWeight.bold,
       color: DaVinciColors.textPrimary,
       fontSize: DaVinciSizes.md,

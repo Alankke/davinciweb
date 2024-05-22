@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:davinciweb/utils/enums/product_categories.dart';
+import 'package:get_storage/get_storage.dart';
 
 class ProductModel {
   final String id;
@@ -39,7 +40,7 @@ class ProductModel {
         id: document.id,
         name: data['Name'] ?? '',
         price: double.parse((data['Price'] ?? 0.0).toString()),
-        category: data['Category'] ?? ProductCategory.noCategory,
+        category: mapStringToProductCategory(data['Category']),
         picture: data['Picture'] ?? '',
       );
     } else {
@@ -52,9 +53,22 @@ class ProductModel {
         id: json['id'],
         name: json['Name'],
         price: json['Price'].toDouble(),
-        // ignore: prefer_interpolation_to_compose_strings
-        category: ProductCategory.values.firstWhere((element) =>
-            element.toString() == 'ProductCategory.' + json['Category']),
+        category: mapStringToProductCategory(json['Category']),
         picture: json['Picture']);
+  }
+
+  static ProductCategory mapStringToProductCategory(String category){
+    switch (category){
+      case 'anteojosDeReceta':
+        return ProductCategory.anteojosDeReceta;
+      case 'anteojosDeSol':
+        return ProductCategory.anteojosDeSol;
+      case 'accesorios':
+        return ProductCategory.accesorios;
+      case 'lentesDeContacto':
+        return ProductCategory.lentesDeContacto;
+      default:
+        return ProductCategory.noCategory;
+    }
   }
 }

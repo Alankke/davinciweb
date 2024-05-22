@@ -1,6 +1,5 @@
 // ignore_for_file: avoid_print
 
-import 'dart:io';
 import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:davinciweb/features/shop/models/product_model.dart';
@@ -13,6 +12,30 @@ class ProductRepository extends GetxController {
 
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
+  //Create
+  Future<void> saveProductRecord(Map<String, dynamic> json) async {
+    try {
+      await _db.collection("Products").add(json);
+    } catch (e) {
+      throw 'Hubieron errores en la creación del producto $e';
+    }
+  }
+
+  //Read
+  Future<List<ProductModel>> getProductsFromFirestore() async {
+    try {
+      final querySnapshot = await _db.collection('Products').get();
+      final products = querySnapshot.docs
+          .map((doc) => ProductModel.fromSnapshot(doc))
+          .toList();
+      return products;
+    } catch (error) {
+      print('Error fetching products from Firestore: $error');
+      return []; // Devuelve una lista vacía en caso de error
+    }
+  }
+
+  //Update
   Future<String> uploadImage(String path, XFile image) async {
     try {
       final ref = FirebaseStorage.instance.ref(path).child(image.name);
@@ -24,36 +47,13 @@ class ProductRepository extends GetxController {
     }
   }
 
+  //Update
   Future<void> updateSingleField(
       Map<String, dynamic> json, String productId) async {
     try {
       await _db.collection("Products").doc().update(json);
     } catch (e) {
       throw 'Hubieron errores en la actualización de campos $e';
-    }
-  }
-
-  Future<void> saveProductRecord(Map<String, dynamic> json) async {
-    try {
-      await _db.collection("Products").add(json);
-    } catch (e) {
-      throw 'Hubieron errores en la creación del producto $e';
-    }
-  }
-
-  Future<List<ProductModel>> getProducts() async {
-    try {
-      QuerySnapshot snapshot = await _db.collection("Products").get();
-      return snapshot.docs.map((doc) {
-        final data = doc.data();
-        if (data != null) {
-          return ProductModel.fromJson(data as Map<String, dynamic>);
-        } else {
-          throw Exception('No se encontró información de ${doc.id}');
-        }
-      }).toList();
-    } catch (e) {
-      throw 'Hubieron errores en la obtención de productos $e';
     }
   }
 }

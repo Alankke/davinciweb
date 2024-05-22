@@ -1,6 +1,5 @@
 // ignore_for_file: avoid_print
 
-import 'package:davinciweb/utils/constants/text_style.dart';
 import 'package:davinciweb/features/shop/controllers/products/create_product_controller.dart';
 import 'package:davinciweb/utils/constants/colors.dart';
 import 'package:davinciweb/utils/constants/sizes.dart';

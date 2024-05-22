@@ -39,7 +39,7 @@ class CreateProductController {
         Map<String, dynamic> newProduct = {
           'Name': name.text.trim(),
           'Price': double.parse(price.text.trim()),
-          'Category': category.toString(),
+          'Category': category.toString().split('.').last,
           'Picture': product.value.picture,
         };
 

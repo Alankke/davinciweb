@@ -50,7 +50,7 @@ class Footer extends StatelessWidget {
               const Padding(
                 padding: EdgeInsets.only(top: 15.0, bottom: 2.0),
                 child: Text('MEDIOS DE PAGO',
-                    style: DaVinciTextStyles.FooterTitle),
+                    style: DaVinciTextStyles.footerTitle),
               ),
               Row(
                 children: paymentMethods,
@@ -63,7 +63,7 @@ class Footer extends StatelessWidget {
               const Padding(
                 padding: EdgeInsets.only(top: 15.0, bottom: 2.0),
                 child:
-                    Text('CONTACTANOS', style: DaVinciTextStyles.FooterTitle),
+                    Text('CONTACTANOS', style: DaVinciTextStyles.footerTitle),
               ),
               TextButton(
                   onPressed: () =>
@@ -78,12 +78,11 @@ class Footer extends StatelessWidget {
             ],
           ),
           //Redes sociales
-          Column(
-            children: [
+          Column(children: [
             const Padding(
               padding: EdgeInsets.only(top: 15.0, bottom: 2.0),
               child:
-                  Text('REDES SOCIALES', style: DaVinciTextStyles.FooterTitle),
+                  Text('REDES SOCIALES', style: DaVinciTextStyles.footerTitle),
             ),
             Row(
               children: socialMedia,

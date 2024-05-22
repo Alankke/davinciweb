@@ -1,5 +1,4 @@
 import 'package:davinciweb/features/authentication/controllers/signup/signup_controller.dart';
-import 'package:davinciweb/utils/constants/colors.dart';
 import 'package:davinciweb/utils/constants/sizes.dart';
 import 'package:davinciweb/utils/validators/validation.dart';
 import 'package:flutter/material.dart';
