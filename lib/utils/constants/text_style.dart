@@ -51,7 +51,7 @@ class DaVinciTextStyles {
   static const TextStyle detailsMd = TextStyle(
       color: DaVinciColors.textPrimary,
       fontSize: DaVinciSizes.fontSizeMd,
-      fontFamily: 'Playfair');
+      fontFamily: 'Merriweather');
 
   static const TextStyle drawer = TextStyle(
       color: DaVinciColors.textWhite,

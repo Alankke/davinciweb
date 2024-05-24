@@ -1,19 +1,20 @@
 // ignore_for_file: avoid_print
-
 import 'package:davinciweb/data/repositories/shop/product_repository.dart';
 import 'package:davinciweb/features/shop/models/product_model.dart';
 import 'package:davinciweb/utils/enums/product_categories.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/state_manager.dart';
 import 'package:image_picker/image_picker.dart';
 
-class CreateProductController {
+class CreateProductController extends GetxController {
   static CreateProductController get instance => Get.find();
 
   //Lógicas
   final Rx<ProductModel> product = ProductModel.emptyProduct().obs;
   final productRepository = Get.put(ProductRepository());
   GlobalKey<FormState> createProductKey = GlobalKey<FormState>();
+  RxBool isLoading = false.obs;
 
   //Form
   final name = TextEditingController();
@@ -25,10 +26,15 @@ class CreateProductController {
   selectPicture() async {
     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (image != null) {
-      final imageUrl = await productRepository.uploadImage("Products/", image);
-      product.update((val) {
-        val!.picture = imageUrl;
-      });
+      isLoading.value = true;
+      try {
+        final imageUrl = await productRepository.uploadImage("Products/", image);
+        product.update((val) {
+          val!.picture = imageUrl;
+        });
+      } finally {
+        isLoading.value = false;
+      }
     }
   }
 

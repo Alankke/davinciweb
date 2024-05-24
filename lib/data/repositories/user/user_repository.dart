@@ -19,7 +19,7 @@ class UserRepository extends GetxController {
       await _db.collection("Users").doc(user.id).set(user.toJson());
     } catch (e) {
       print("Error producido $e");
-      throw 'Se produjo un error y no se pudo registrar en la base de datos';
+      throw 'Se produjo un error y no se pudo registrar en la base de datos $e';
     }
   }
 

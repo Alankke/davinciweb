@@ -42,9 +42,8 @@ class CreateProductForm extends StatelessWidget {
                       child: Obx(() {
                         final networkImage = controller.product.value.picture;
                         return networkImage.isEmpty
-                            ? const Icon(Icons.landscape,
-                                color: DaVinciColors.dark)
-                            : Image.network(networkImage);
+                            ? const Icon(Icons.landscape, color: DaVinciColors.dark)
+                            : controller.isLoading.value == true ? const Center(child: CircularProgressIndicator()) : Image.network(networkImage);
                       }),
                     ),
                   );

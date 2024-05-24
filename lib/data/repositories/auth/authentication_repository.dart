@@ -18,7 +18,7 @@ class AuthenticationRepository extends GetxController {
       return await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
     } catch (e) {
-      throw 'Se produjo un error y no se pudo registrar su cuenta';
+      throw 'Se produjo un error y no se pudo registrar su cuenta $e';
     }
   }
 
