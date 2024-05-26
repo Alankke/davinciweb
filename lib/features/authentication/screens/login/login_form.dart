@@ -5,8 +5,6 @@ import 'package:davinciweb/utils/validators/validation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-//TODO
-//Botón crear cuenta en login
 
 class LogInForm extends StatelessWidget {
   const LogInForm({super.key});

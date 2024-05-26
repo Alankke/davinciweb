@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:davinciweb/features/shop/models/product_model.dart';
 import 'package:davinciweb/common/widgets/appbar/appbar.dart';
 import 'package:davinciweb/common/widgets/custom_shapes/footer.dart';

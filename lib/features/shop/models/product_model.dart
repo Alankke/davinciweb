@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:davinciweb/utils/enums/product_categories.dart';
-import 'package:get_storage/get_storage.dart';
 
 class ProductModel {
   final String id;

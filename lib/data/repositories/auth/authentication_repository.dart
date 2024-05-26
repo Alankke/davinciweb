@@ -1,14 +1,18 @@
+import 'package:davinciweb/data/services/user_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
-  final _auth = FirebaseAuth.instance;
+  final userService = Get.put(UserService());
 
+  final _auth = FirebaseAuth.instance;
   User? get authUser => _auth.currentUser;
 
+  @override
   void onReady() {
-    //screenRedirect();
+    super.onReady();
+    userService.redirect();
   }
 
   //Crear cuenta

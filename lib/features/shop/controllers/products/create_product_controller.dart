@@ -4,7 +4,6 @@ import 'package:davinciweb/features/shop/models/product_model.dart';
 import 'package:davinciweb/utils/enums/product_categories.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/state_manager.dart';
 import 'package:image_picker/image_picker.dart';
 
 class CreateProductController extends GetxController {
