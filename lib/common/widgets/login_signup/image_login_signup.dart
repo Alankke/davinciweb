@@ -5,29 +5,15 @@ class Logo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isSmallScreen = MediaQuery.of(context).size.width < 600;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         Image.asset(
           "assets/logos/davinciLogo.png",
-          height: 60,
+          height: MediaQuery.of(context).size.height / 2,
+          width: MediaQuery.of(context).size.width / 2,
         ),
-        //Quizás sacar esto
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Text(
-            "Da Vinci Web",
-            textAlign: TextAlign.center,
-            style: isSmallScreen
-                ? Theme.of(context).textTheme.headlineSmall
-                : Theme.of(context)
-                    .textTheme
-                    .headlineMedium
-                    ?.copyWith(color: Colors.black),
-          ),
-        )
       ],
     );
   }

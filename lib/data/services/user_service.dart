@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:davinciweb/features/shop/screens/home/admin_home.dart';
-import 'package:davinciweb/features/shop/screens/home/home.dart';
+import 'package:davinciweb/features/shop/screens/admin/admin_home.dart';
+import 'package:davinciweb/features/shop/screens/client/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 

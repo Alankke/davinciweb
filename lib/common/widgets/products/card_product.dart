@@ -1,6 +1,8 @@
+import 'package:davinciweb/features/shop/controllers/products/cart_controller.dart';
 import 'package:davinciweb/features/shop/models/product_model.dart';
 import 'package:davinciweb/utils/constants/text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 // Widget ProductCard
 class ProductCard extends StatelessWidget {
@@ -9,10 +11,8 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cartController = Get.put(CartController());
     return GestureDetector(
-      onTap: () {
-        // Lógica para cuando se presione la tarjeta de producto
-      },
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
@@ -29,6 +29,10 @@ class ProductCard extends StatelessWidget {
           Text(
             '\$${product.price.toStringAsFixed(2)}',
             style: DaVinciTextStyles.detailsMd,
+          ),
+          ElevatedButton(
+            onPressed: () => cartController.addToCart(product),
+            child: const Text('Agregar al carrito')
           )
         ],
       )

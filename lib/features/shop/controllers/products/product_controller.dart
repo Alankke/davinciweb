@@ -25,5 +25,4 @@ class ProductController extends GetxController {
       return []; // Devuelve una lista vacía en caso de error
     }
   }
-
 }

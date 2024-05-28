@@ -1,4 +1,4 @@
-import 'package:davinciweb/features/shop/screens/home/home.dart';
+import 'package:davinciweb/features/shop/screens/client/home.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

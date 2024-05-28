@@ -35,5 +35,5 @@ class AuthenticationRepository extends GetxController {
     } catch (e) {
       throw 'Se produjo un error y no se pudo iniciar sesión en su cuenta';
     }
-  }
+  }  
 }

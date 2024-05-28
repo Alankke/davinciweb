@@ -1,4 +1,5 @@
 import 'package:davinciweb/features/authentication/controllers/login/login_controller.dart';
+import 'package:davinciweb/features/authentication/screens/signup/signup.dart';
 import 'package:davinciweb/utils/constants/colors.dart';
 import 'package:davinciweb/utils/constants/sizes.dart';
 import 'package:davinciweb/utils/validators/validation.dart';
@@ -74,6 +75,14 @@ class LogInForm extends StatelessWidget {
                 onPressed: () => controller.emailAndPasswordSignIn(),
               ),
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Text('¿No tienes cuenta?'),
+                TextButton(child: const Text('Crear Cuenta'), onPressed: () => Get.off(() => const SignUp()))
+              ],
+            )
           ],
         ),
       ),

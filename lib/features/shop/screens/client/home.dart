@@ -17,7 +17,7 @@ class Home extends StatelessWidget {
     final controller = Get.put(ProductController());
 
     return Scaffold(
-      appBar: const HomeAppBar(),
+      appBar: HomeAppBar(),
       body: Column(
         children: [
           Expanded(

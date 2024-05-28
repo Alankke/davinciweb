@@ -1,5 +1,6 @@
 import 'package:davinciweb/common/widgets/custom_shapes/admin_header.dart';
-import 'package:davinciweb/features/shop/screens/home/home.dart';
+import 'package:davinciweb/features/authentication/controllers/login/login_controller.dart';
+import 'package:davinciweb/features/shop/screens/client/home.dart';
 import 'package:davinciweb/utils/constants/colors.dart';
 import 'package:davinciweb/utils/constants/text_style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,6 +12,7 @@ class AdminAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loginController = Get.put(LogInController());
     return AppBar(
       backgroundColor: DaVinciColors.midnight,
       automaticallyImplyLeading: true,
@@ -20,7 +22,7 @@ class AdminAppBar extends StatelessWidget implements PreferredSizeWidget {
         TextButton(
           child: const Text('Cerrar Sesión',
               style: DaVinciTextStyles.appBarTextStyleMd),
-          onPressed: () => logout(),
+          onPressed: () => loginController.logout(),
         )
       ],
     );
@@ -30,8 +32,4 @@ class AdminAppBar extends StatelessWidget implements PreferredSizeWidget {
   // TODO: implement preferredSize
   Size get preferredSize => const Size.fromHeight(200);
 
-  logout() async {
-    await FirebaseAuth.instance.signOut();
-    Get.to(const Home());
-  }
 }

@@ -1,4 +1,5 @@
 import 'package:davinciweb/features/authentication/controllers/signup/signup_controller.dart';
+import 'package:davinciweb/features/authentication/screens/login/login.dart';
 import 'package:davinciweb/utils/constants/sizes.dart';
 import 'package:davinciweb/utils/validators/validation.dart';
 import 'package:flutter/material.dart';
@@ -85,6 +86,14 @@ class SignUpForm extends StatelessWidget {
                   ),
                   onPressed: () => controller.signup()),
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Text('¿Ya tienes una cuenta?'),
+                TextButton(child: const Text('Iniciar sesión'), onPressed: () => Get.off(() => const LogIn()))
+              ],
+            )
           ],
         ),
       ),
