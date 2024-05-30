@@ -1,9 +1,7 @@
 import 'package:davinciweb/common/widgets/custom_shapes/admin_header.dart';
 import 'package:davinciweb/features/authentication/controllers/login/login_controller.dart';
-import 'package:davinciweb/features/shop/screens/client/home.dart';
 import 'package:davinciweb/utils/constants/colors.dart';
 import 'package:davinciweb/utils/constants/text_style.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

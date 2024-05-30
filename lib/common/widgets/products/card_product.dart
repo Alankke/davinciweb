@@ -1,6 +1,7 @@
-import 'package:davinciweb/features/shop/controllers/products/cart_controller.dart';
+import 'package:davinciweb/features/shop/controllers/cart_controller.dart';
 import 'package:davinciweb/features/shop/models/product_model.dart';
 import 'package:davinciweb/utils/constants/text_style.dart';
+import 'package:davinciweb/utils/formatters/formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -27,7 +28,7 @@ class ProductCard extends StatelessWidget {
           ),
           Text(product.name, style: DaVinciTextStyles.detailsMd,),
           Text(
-            '\$${product.price.toStringAsFixed(2)}',
+            DaVinciFormatter.formatCurrency(product.price),
             style: DaVinciTextStyles.detailsMd,
           ),
           ElevatedButton(

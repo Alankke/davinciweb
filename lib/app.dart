@@ -8,6 +8,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Da Vinci Web',
       home: Home()
     );

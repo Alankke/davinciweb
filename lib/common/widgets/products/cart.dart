@@ -1,46 +1,123 @@
-import 'package:davinciweb/features/shop/controllers/products/cart_controller.dart';
-import 'package:davinciweb/features/shop/models/product_model.dart';
 import 'package:davinciweb/features/shop/screens/client/home.dart';
+import 'package:davinciweb/utils/formatters/formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:davinciweb/features/shop/controllers/cart_controller.dart';
+import 'package:davinciweb/features/shop/models/product_model.dart';
+import 'package:davinciweb/utils/constants/colors.dart';
+import 'package:davinciweb/utils/constants/text_style.dart';
 
-class Cart {
-  final cartController = Get.put(CartController());
+class SlideInCart extends StatefulWidget {
+  @override
+  _SlideInCartState createState() => _SlideInCartState();
+}
 
-  void showCartDialog(BuildContext context, List<ProductModel> products){
-    showDialog(
-      context: context,
-      builder: (BuildContext context){
-        return Dialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.0),
-          ),
-          child: Container(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Text('Carrito de compras'),
-                const SizedBox(height: 20.0),
-                ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: products.length,
-                  itemBuilder: (context, index){
-                    ProductModel product = products[index];
-                    return ListTile(
-                      leading: Image.network(product.picture, width: 50, height: 50),
-                      title: Text(product.name),
-                      subtitle: Text('\$${product.price.toStringAsFixed(2)}'),
-                    );
-                  }                  
-                  ),
-                  const SizedBox(height: 20.0),
-                  ElevatedButton(onPressed: () => Get.to(const Home()), child: const Text('Finalizar compra'))
-              ],
-            ),
-          ),
-        );
+class _SlideInCartState extends State<SlideInCart> with SingleTickerProviderStateMixin {
+  final CartController cartController = Get.put(CartController());
+  late AnimationController _animationController;
+  late Animation<Offset> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    );
+    _animation = Tween<Offset>(
+      begin: const Offset(1.0, 0.0),
+      end: const Offset(0.0, 0.0),
+    ).animate(CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeInOut,
+    ));
+
+    cartController.isCartVisible.listen((visible) {
+      if (visible) {
+        _animationController.forward();
+      } else {
+        _animationController.reverse();
       }
+    });
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SlideTransition(
+      position: _animation,
+      child: Material(
+        color: Colors.transparent,
+        child: Container(
+          width: MediaQuery.of(context).size.width * 0.30,
+          height: MediaQuery.of(context).size.height,
+          color: Colors.white,
+          child: Column(
+            children: [
+              AppBar(
+                title: const Text('Carrito de compras', style: DaVinciTextStyles.homeLargeMerr),
+                automaticallyImplyLeading: false,
+                actions: [
+                  IconButton(
+                    icon: const Icon(Icons.close, color: DaVinciColors.error),
+                    onPressed: () {
+                      cartController.toggleCartVisibility();
+                    },
+                  ),
+                ],
+              ),
+              Expanded(
+                child: Obx(() {
+                  return ListView.builder(
+                    itemCount: cartController.cartItems.length,
+                    itemBuilder: (context, index) {
+                      ProductModel product = cartController.cartItems[index];
+                      return ListTile(
+                        leading: Image.network(product.picture, width: 50, height: 50),
+                        title: Text(product.name),
+                        subtitle: Text(DaVinciFormatter.formatCurrency(product.price),),
+                        trailing: IconButton(
+                          icon: const Icon(Icons.delete_outline, color: DaVinciColors.error),
+                          onPressed: () {
+                            cartController.removeFromCart(product);
+                          },
+                        ),
+                      );
+                    },
+                  );
+                }),
+              ),
+              Padding(
+                padding: const EdgeInsetsDirectional.all(16.0),
+                child: Column(
+                  children: [
+                    Obx((){
+                      double total = cartController.sumTotal();
+                      return Text(DaVinciFormatter.formatCurrency(total), style: DaVinciTextStyles.homeLargeMerr,);
+                    }                    
+                    )
+                  ],
+                )
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    cartController.toggleCartVisibility();
+                    Get.to(const Home());
+                  },
+                  child: const Text('Finalizar compra'),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

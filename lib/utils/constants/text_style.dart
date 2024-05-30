@@ -38,15 +38,20 @@ class DaVinciTextStyles {
       fontSize: DaVinciSizes.xl,
       fontFamily: 'Playfair');
 
-  static const TextStyle homeLarge = TextStyle(
-      color: DaVinciColors.textPrimary,
-      fontSize: DaVinciSizes.xl,
-      fontFamily: 'Playfair');
-
   static const TextStyle headlineLargeDark = TextStyle(
       color: DaVinciColors.dark,
       fontSize: DaVinciSizes.fontSizeLg,
       fontFamily: 'Playfair');
+
+  static const TextStyle homeLarge = TextStyle(
+      color: DaVinciColors.textPrimary,
+      fontSize: DaVinciSizes.xl,
+      fontFamily: 'Playfair');  
+
+  static const TextStyle homeLargeMerr = TextStyle(
+      color: DaVinciColors.textPrimary,
+      fontSize: DaVinciSizes.xl,
+      fontFamily: 'Merriweather'); 
 
   static const TextStyle detailsMd = TextStyle(
       color: DaVinciColors.textPrimary,

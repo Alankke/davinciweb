@@ -1,4 +1,4 @@
-import 'package:davinciweb/common/widgets/login_signup/image_login_signup.dart';
+import 'package:davinciweb/common/widgets/custom_shapes/image_login_signup.dart';
 import 'package:davinciweb/features/authentication/screens/signup/signup_form.dart';
 import 'package:davinciweb/features/shop/screens/client/home.dart';
 import 'package:flutter/material.dart';
