@@ -60,7 +60,7 @@ class _SlideInCartState extends State<SlideInCart> with SingleTickerProviderStat
           child: Column(
             children: [
               AppBar(
-                title: const Text('Carrito de compras', style: DaVinciTextStyles.homeLargeMerr),
+                backgroundColor: Colors.transparent,
                 automaticallyImplyLeading: false,
                 actions: [
                   IconButton(
@@ -98,7 +98,7 @@ class _SlideInCartState extends State<SlideInCart> with SingleTickerProviderStat
                   children: [
                     Obx((){
                       double total = cartController.sumTotal();
-                      return Text(DaVinciFormatter.formatCurrency(total), style: DaVinciTextStyles.homeLargeMerr,);
+                      return Text('Total: ${DaVinciFormatter.formatCurrency(total)}', style: DaVinciTextStyles.footerTitle);
                     }                    
                     )
                   ],
