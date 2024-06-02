@@ -12,6 +12,8 @@ class UserRepository extends GetxController {
   static UserRepository get instance => Get.find();
 
   final FirebaseFirestore _db = FirebaseFirestore.instance;
+  final Rx<UserModel> _user = UserModel.emptyUser().obs;
+  UserModel get user => _user.value;
 
   //Función para guardar usuario en firestore
   Future<void> saveUserRecord(UserModel user) async {
@@ -24,16 +26,16 @@ class UserRepository extends GetxController {
   }
 
   //Función para traer todos los datos del usuario logueado al momento
-  Future<UserModel> fetchUserDetails() async {
+  Future<void> fetchUserDetails() async {
     try {
       final documentSnapshot = await _db
           .collection("Users")
           .doc(AuthenticationRepository.instance.authUser?.uid)
           .get();
-      if (documentSnapshot.exists) {
-        return UserModel.fromSnapshot(documentSnapshot);
+     if (documentSnapshot.exists) {
+        _user.value = UserModel.fromSnapshot(documentSnapshot);
       } else {
-        return UserModel.emptyUser();
+        _user.value = UserModel.emptyUser();
       }
     } catch (e) {
       print("Error producido $e");

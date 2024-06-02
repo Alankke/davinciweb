@@ -9,7 +9,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Da Vinci Web',
+      title: 'Óptica Da Vinci',
       home: Home()
     );
   }

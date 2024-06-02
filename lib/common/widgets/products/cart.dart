@@ -1,13 +1,15 @@
-import 'package:davinciweb/features/shop/screens/client/home.dart';
-import 'package:davinciweb/utils/formatters/formatter.dart';
+import 'package:davinciweb/features/shop/screens/client/checkout/checkout_cart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:davinciweb/features/shop/controllers/cart_controller.dart';
 import 'package:davinciweb/features/shop/models/product_model.dart';
 import 'package:davinciweb/utils/constants/colors.dart';
 import 'package:davinciweb/utils/constants/text_style.dart';
+import 'package:davinciweb/utils/formatters/formatter.dart';
 
 class SlideInCart extends StatefulWidget {
+  const SlideInCart({super.key});
+
   @override
   _SlideInCartState createState() => _SlideInCartState();
 }
@@ -80,7 +82,7 @@ class _SlideInCartState extends State<SlideInCart> with SingleTickerProviderStat
                       return ListTile(
                         leading: Image.network(product.picture, width: 50, height: 50),
                         title: Text(product.name),
-                        subtitle: Text(DaVinciFormatter.formatCurrency(product.price),),
+                        subtitle: Text(DaVinciFormatter.formatCurrency(product.price)),
                         trailing: IconButton(
                           icon: const Icon(Icons.delete_outline, color: DaVinciColors.error),
                           onPressed: () {
@@ -96,20 +98,22 @@ class _SlideInCartState extends State<SlideInCart> with SingleTickerProviderStat
                 padding: const EdgeInsetsDirectional.all(16.0),
                 child: Column(
                   children: [
-                    Obx((){
+                    Obx(() {
                       double total = cartController.sumTotal();
-                      return Text('Total: ${DaVinciFormatter.formatCurrency(total)}', style: DaVinciTextStyles.footerTitle);
-                    }                    
-                    )
+                      return Text(
+                        'Total: ${DaVinciFormatter.formatCurrency(total)}',
+                        style: DaVinciTextStyles.footerTitle,
+                      );
+                    }),
                   ],
-                )
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: ElevatedButton(
                   onPressed: () {
                     cartController.toggleCartVisibility();
-                    Get.to(const Home());
+                    Get.to(() => CheckoutCart());
                   },
                   child: const Text('Finalizar compra'),
                 ),

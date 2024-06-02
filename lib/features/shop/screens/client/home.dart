@@ -54,7 +54,7 @@ class Home extends StatelessWidget {
                   ),
                 ),
                 SliverToBoxAdapter(
-                  child: Footer(), // Footer at the end
+                  child: Footer(),
                 ),
               ],
             );

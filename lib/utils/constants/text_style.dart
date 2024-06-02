@@ -74,4 +74,16 @@ class DaVinciTextStyles {
       color: DaVinciColors.textPrimary,
       fontSize: DaVinciSizes.md,
       fontFamily: 'Merriweather');
+
+  static const TextStyle cartInfoMd = TextStyle(
+      color: DaVinciColors.textPrimary,
+      fontSize: DaVinciSizes.md,
+      fontFamily: 'Merriweather');
+
+  static const TextStyle cartInfoLg = TextStyle(
+      color: DaVinciColors.textPrimary,
+      fontSize: DaVinciSizes.lg,
+      fontFamily: 'Merriweather');
+
+    
 }
