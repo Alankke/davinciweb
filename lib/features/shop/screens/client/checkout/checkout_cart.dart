@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 class CheckoutCart extends StatelessWidget {
   CheckoutCart({super.key});
   final CartController cartController = Get.find<CartController>();
+  final PaymentMethodController paymentMethodController = Get.put(PaymentMethodController());
 
   @override
   Widget build(BuildContext context) {
@@ -64,22 +65,40 @@ class CheckoutCart extends StatelessWidget {
                   const SizedBox(height: DaVinciSizes.spaceBtwItems),
                   ElevatedButton(
                     onPressed: () {
-                      //Llamar a un método que cree y registre una nueva venta en firestore
-                      showDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          title: const Text('Procesar Pago'),
-                          content: const Text('Tu pago ha sido procesado exitosamente.'),
-                          actions: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: const Text('OK'),
-                            ),
-                          ],
-                        ),
-                      );
+                      if (paymentMethodController.selectedPaymentMethod.value == null) {
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: const Text('Error'),
+                            content: const Text('Debe seleccionar un método de pago antes de finalizar la compra.'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          ),
+                        );
+                      } else {
+                        // Llamar a un método que cree y registre una nueva venta en Firestore
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: const Text('Procesar Pago'),
+                            content: const Text('Tu pago ha sido procesado exitosamente.'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
                     },
                     child: const Text('Pagar'),
                   ),
