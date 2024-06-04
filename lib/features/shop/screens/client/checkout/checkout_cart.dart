@@ -1,3 +1,4 @@
+import 'package:davinciweb/data/repositories/user/user_repository.dart';
 import 'package:davinciweb/features/shop/controllers/cart/cart_controller.dart';
 import 'package:davinciweb/features/shop/controllers/cart/checkout_controller.dart';
 import 'package:davinciweb/features/shop/screens/client/checkout/payment_method.dart';
@@ -13,6 +14,7 @@ class CheckoutCart extends StatelessWidget {
   CheckoutCart({super.key});
   final cartController = Get.find<CartController>();
   final checkoutController = Get.put(CheckoutController());
+  final userRepository = Get.put(UserRepository());
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +77,7 @@ class CheckoutCart extends StatelessWidget {
                             actions: [
                               TextButton(
                                 onPressed: () {
-                                  Navigator.of(context).pop();
+                                  Get.back();
                                 },
                                 child: const Text('OK'),
                               ),
@@ -83,22 +85,14 @@ class CheckoutCart extends StatelessWidget {
                           ),
                         );
                       } else {
-                        // Llamar a un método que cree y registre una nueva venta en Firestore
-                        showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                            title: const Text('Procesar Pago'),
-                            content: const Text('Tu pago ha sido procesado exitosamente.'),
-                            actions: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child: const Text('OK'),
-                              ),
-                            ],
-                          ),
-                        );
+                        final products = cartController.cartItems.map((product) => {
+                          'name': product.name,
+                          'price': product.price,
+                        }).toList();
+
+                        double totalAmount = cartController.sumTotal();
+                        String userId = userRepository.user.id;
+                        checkoutController.createSale(userId, products, totalAmount);
                       }
                     },
                     child: const Text('Pagar'),

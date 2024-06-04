@@ -22,7 +22,6 @@ class CheckoutController extends GetxController{
   //Lógicas
   final saleRepository = Get.put(SaleRepository());
   final Rx<SaleModel> sale = SaleModel.emptySale().obs;
-  GlobalKey<FormState> checkoutKey = GlobalKey<FormState>();
 
   void setSelectedPaymentMethod(String method) {
     selectedPaymentMethod.value = method;
@@ -36,22 +35,26 @@ class CheckoutController extends GetxController{
 
   void createSale(String userId, List<Map<String, dynamic>> products, double totalAmount) async {
     try {
-      if(checkoutKey.currentState != null && checkoutKey.currentState!.validate()){
-        String generatedCode = generateSaleCode(6);
-
-        SaleModel newSale = SaleModel(
-          id: FirebaseFirestore.instance.collection('Sales').doc().id,
-          userId: userId,
-          products: products,
-          totalAmount: totalAmount,
-          paymentMethod: selectedPaymentMethod.value!,
-          generatedCode: generatedCode,
-          state: 'Pendiente',
-          timestamp: Timestamp.now()
-        );
-      }
-    } catch (e) {
       
+      String generatedCode = generateSaleCode(6);
+
+      SaleModel newSale = SaleModel(
+        id: FirebaseFirestore.instance.collection('Sales').doc().id,
+        userId: userId,
+        paymentMethod: selectedPaymentMethod.value!,
+        state: 'Pendiente',
+        generatedCode: generatedCode,
+        products: products,
+        totalAmount: totalAmount,
+        timestamp: Timestamp.now(),
+      );
+
+      await saleRepository.saveSaleRecord(newSale);
+      Get.snackbar('Éxito', 'Venta creada con éxito. Código: $generatedCode');
+      
+    } catch (e) {
+      print('Error al crear venta $e');
+      Get.snackbar('Error', 'Ocurrió un error al crear la venta');
     }
   }
 }

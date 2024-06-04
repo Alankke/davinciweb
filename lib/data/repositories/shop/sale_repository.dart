@@ -9,9 +9,9 @@ class SaleRepository {
 
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
-  Future<void> saveSaleRecord(Map<String, dynamic> json,) async {
+  Future<void> saveSaleRecord(SaleModel sale) async {
     try {
-      await _db.collection('Sales').add(json);
+      await _db.collection('Sales').add(sale.toJson());
     } catch (error) {
       throw 'Hubieron problemas al intentar registrar una venta en Firestore: $error';
     }
