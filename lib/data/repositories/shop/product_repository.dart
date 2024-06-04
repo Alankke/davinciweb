@@ -30,7 +30,7 @@ class ProductRepository extends GetxController {
           .toList();
       return products;
     } catch (error) {
-      print('Error fetching products from Firestore: $error');
+      print('Error trayendo productos desde Firestore: $error');
       return []; // Devuelve una lista vacía en caso de error
     }
   }
@@ -43,7 +43,7 @@ class ProductRepository extends GetxController {
       await ref.putData(data);
       return await ref.getDownloadURL();
     } catch (e) {
-      throw 'Hubieron errores en la subida de imagen $e';
+      throw 'Hubieron errores en la subida de imagen a firestore: $e';
     }
   }
 
@@ -53,7 +53,7 @@ class ProductRepository extends GetxController {
     try {
       await _db.collection("Products").doc().update(json);
     } catch (e) {
-      throw 'Hubieron errores en la actualización de campos $e';
+      throw 'Hubieron errores en la actualización de campos en firestore: $e';
     }
   }
 }
