@@ -1,4 +1,4 @@
-import 'package:davinciweb/features/shop/controllers/credit_card_controller.dart';
+import 'package:davinciweb/features/shop/controllers/cart/checkout_controller.dart';
 import 'package:davinciweb/utils/constants/sizes.dart';
 import 'package:davinciweb/utils/formatters/formatter.dart';
 import 'package:davinciweb/utils/validators/validation.dart';
@@ -11,18 +11,19 @@ class CreditCardForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(CreditCardController());
+    final controller = Get.put(CheckoutController());
 
     return Form(
-      key: controller.creditCardKey,
+      key: controller.cardKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text('Ingresa los datos de tu tarjeta:'),
           const SizedBox(height: DaVinciSizes.spaceBtwItems / 2),
           TextFormField(
-            controller: controller.name,
-            validator: (value) => DaVinciValidator.validateEmptyText('Nombre del titular', value),
+            controller: controller.cardName,
+            validator: (value) =>
+                DaVinciValidator.validateEmptyText('Nombre del titular', value),
             decoration: const InputDecoration(
               labelText: 'Nombre del Titular',
               border: OutlineInputBorder(),
@@ -30,7 +31,7 @@ class CreditCardForm extends StatelessWidget {
           ),
           const SizedBox(height: DaVinciSizes.spaceBtwItems / 2),
           TextFormField(
-            controller: controller.numbers,
+            controller: controller.cardNumbers,
             validator: (value) => DaVinciValidator.validateCardNumber(value),
             decoration: const InputDecoration(
               labelText: 'Número de la Tarjeta',
@@ -43,8 +44,9 @@ class CreditCardForm extends StatelessWidget {
             children: [
               Expanded(
                 child: TextFormField(
-                  controller: controller.expiryDate,
-                  validator: (value) => DaVinciValidator.validateExpiryDate(value),
+                  controller: controller.cardExpiryDate,
+                  validator: (value) =>
+                      DaVinciValidator.validateExpiryDate(value),
                   decoration: const InputDecoration(
                     labelText: 'Vencimiento (MM/AA)',
                     border: OutlineInputBorder(),
@@ -59,7 +61,7 @@ class CreditCardForm extends StatelessWidget {
               const SizedBox(width: DaVinciSizes.sm),
               Expanded(
                 child: TextFormField(
-                  controller: controller.cvv,
+                  controller: controller.cardCvv,
                   validator: (value) => DaVinciValidator.validateCvv(value),
                   decoration: const InputDecoration(
                     labelText: 'CVV',
@@ -74,7 +76,7 @@ class CreditCardForm extends StatelessWidget {
           Center(
             child: TextButton(
               onPressed: () {
-                if (controller.creditCardKey.currentState!.validate()) {
+                if (controller.cardKey.currentState!.validate()) {
                   // Lógica para procesar el pago con tarjeta
                 } else {
                   // El formulario contiene errores, no se procesa el pago
@@ -91,7 +93,8 @@ class CreditCardForm extends StatelessWidget {
 
 class _ExpiryDateInputFormatter extends TextInputFormatter {
   @override
-  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
     final text = newValue.text;
 
     // Eliminamos cualquier carácter no numérico

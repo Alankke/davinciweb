@@ -4,7 +4,7 @@ import 'package:davinciweb/features/shop/models/product_model.dart';
 import 'package:davinciweb/common/widgets/appbar/appbar.dart';
 import 'package:davinciweb/common/widgets/custom_shapes/footer.dart';
 import 'package:davinciweb/common/widgets/products/card_product.dart';
-import 'package:davinciweb/features/shop/controllers/product_controller.dart';
+import 'package:davinciweb/features/shop/controllers/product/product_controller.dart';
 import 'package:davinciweb/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

@@ -22,7 +22,7 @@ class CreateProductController extends GetxController {
   String picture = '';
 
   //Selecciona la imagen con el paquete y actualiza la imagen actual con método.
-  selectPicture() async {
+  void selectPicture() async {
     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (image != null) {
       isLoading.value = true;
@@ -36,8 +36,8 @@ class CreateProductController extends GetxController {
       }
     }
   }
-
-  createProduct() async {
+  
+  void createProduct() async {
     try {
       if (createProductKey.currentState != null &&
           createProductKey.currentState!.validate()) {

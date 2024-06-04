@@ -1,4 +1,4 @@
-import 'package:davinciweb/features/shop/controllers/cart_controller.dart';
+import 'package:davinciweb/features/shop/controllers/cart/cart_controller.dart';
 import 'package:davinciweb/features/shop/models/product_model.dart';
 import 'package:davinciweb/utils/constants/text_style.dart';
 import 'package:davinciweb/utils/formatters/formatter.dart';

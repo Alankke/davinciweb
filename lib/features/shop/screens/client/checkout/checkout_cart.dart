@@ -1,5 +1,5 @@
-import 'package:davinciweb/features/shop/controllers/cart_controller.dart';
-import 'package:davinciweb/features/shop/controllers/payment_method_controller.dart';
+import 'package:davinciweb/features/shop/controllers/cart/cart_controller.dart';
+import 'package:davinciweb/features/shop/controllers/cart/checkout_controller.dart';
 import 'package:davinciweb/features/shop/screens/client/checkout/payment_method.dart';
 import 'package:davinciweb/features/shop/screens/client/checkout/user_info.dart';
 import 'package:davinciweb/utils/constants/colors.dart';
@@ -11,8 +11,8 @@ import 'package:get/get.dart';
 
 class CheckoutCart extends StatelessWidget {
   CheckoutCart({super.key});
-  final CartController cartController = Get.find<CartController>();
-  final PaymentMethodController paymentMethodController = Get.put(PaymentMethodController());
+  final cartController = Get.find<CartController>();
+  final checkoutController = Get.put(CheckoutController());
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +66,7 @@ class CheckoutCart extends StatelessWidget {
                   const SizedBox(height: DaVinciSizes.spaceBtwItems),
                   ElevatedButton(
                     onPressed: () {
-                      if (paymentMethodController.selectedPaymentMethod.value == null) {
+                      if (checkoutController.selectedPaymentMethod.value == null) {
                         showDialog(
                           context: context,
                           builder: (context) => AlertDialog(

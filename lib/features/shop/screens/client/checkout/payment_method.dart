@@ -1,4 +1,4 @@
-import 'package:davinciweb/features/shop/controllers/payment_method_controller.dart';
+import 'package:davinciweb/features/shop/controllers/cart/checkout_controller.dart';
 import 'package:davinciweb/features/shop/screens/client/checkout/credit_card_form.dart';
 import 'package:davinciweb/utils/constants/sizes.dart';
 import 'package:davinciweb/utils/constants/text_style.dart';
@@ -13,8 +13,8 @@ class PaymentMethodSection extends StatefulWidget {
 }
 
 class _PaymentMethodSectionState extends State<PaymentMethodSection> {
-  final PaymentMethodController paymentMethodController =
-      Get.put(PaymentMethodController());
+  final controller =
+      Get.put(CheckoutController());
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +53,9 @@ class _PaymentMethodSectionState extends State<PaymentMethodSection> {
             ],
           ),
           value: title,
-          groupValue: paymentMethodController.selectedPaymentMethod.value,
+          groupValue: controller.selectedPaymentMethod.value,
           onChanged: (value) {
-            paymentMethodController.setSelectedPaymentMethod(value!);
+            controller.setSelectedPaymentMethod(value!);
             _buildPaymentDetails(context);
           },
         );
@@ -64,7 +64,7 @@ class _PaymentMethodSectionState extends State<PaymentMethodSection> {
   }
 
   void _buildPaymentDetails(BuildContext context) {
-    final selectedMethod = paymentMethodController.selectedPaymentMethod.value;
+    final selectedMethod = controller.selectedPaymentMethod.value;
     if (selectedMethod == 'Efectivo') {
       showDialog(
           context: context,
