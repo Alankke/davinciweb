@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:davinciweb/data/repositories/auth/authentication_repository.dart';
 import 'package:davinciweb/data/services/user_service.dart';
 import 'package:davinciweb/features/shop/screens/client/home.dart';

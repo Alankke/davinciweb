@@ -12,12 +12,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
-  HomeAppBar({super.key});
+  HomeAppBar({super.key, this.cartOverlayEntry});
 
   final loginController = Get.put(LogInController());
   final cartController = Get.put(CartController());
   OverlayEntry? cartOverlayEntry;
-  final cart = SlideInCart();
+  final cart = const SlideInCart();
 
   @override
   Widget build(BuildContext context) {
@@ -115,14 +115,14 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   void toggleCartOverlay(BuildContext context) {
     if (cartOverlayEntry == null) {
       cartOverlayEntry = createCartOverlayEntry(context);
-      Overlay.of(context)?.insert(cartOverlayEntry!);
+      Overlay.of(context).insert(cartOverlayEntry!);
     }
     cartController.toggleCartVisibility();
   }
 
      OverlayEntry createCartOverlayEntry(BuildContext context) {
     return OverlayEntry(
-      builder: (context) => Positioned(
+      builder: (context) => const Positioned(
         top: 0,
         right: 0,
         child: SlideInCart(),
@@ -132,6 +132,5 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
 
 
   @override
-  // TODO: implement preferredSize
   Size get preferredSize => const Size.fromHeight(200);
 }

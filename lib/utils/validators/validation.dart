@@ -41,4 +41,44 @@ class DaVinciValidator {
                         ? 'La contraseña debe tener mínimo un carácter especial'
                         : null;
   }
+
+  static String? validateCvv(String? cvv) {
+    return (cvv == null || cvv.isEmpty)
+        ? 'Debes proporcionar un CVV'
+        : (cvv.length != 3)
+            ? 'El CVV debe tener exactamente 3 números'
+            : !RegExp(r'^\d{3}$').hasMatch(cvv)
+                ? 'El CVV solo puede contener números'
+                : null;
+  }
+
+  static String? validateExpiryDate(String? expiryDate) {
+    if (expiryDate == null || expiryDate.isEmpty) {
+      return 'Debes proporcionar una fecha de vencimiento';
+    }
+    final dateRegex = RegExp(r'^(0[1-9]|1[0-2])\/\d{2}$');
+    if (!dateRegex.hasMatch(expiryDate)) {
+      return 'El formato del vencimiento debe ser MM/AA';
+    }
+    final now = DateTime.now();
+    final parts = expiryDate.split('/');
+    final month = int.parse(parts[0]);
+    final year = int.parse('20${parts[1]}');
+    final expiry = DateTime(year, month);
+
+    if (expiry.isBefore(DateTime(now.year, now.month))) {
+      return 'La fecha de vencimiento debe ser futura';
+    }
+    return null;
+  }
+
+  static String? validateCardNumber(String? cardNumber) {
+    return (cardNumber == null || cardNumber.isEmpty)
+        ? 'Debes proporcionar un número de tarjeta'
+        : (cardNumber.length != 16)
+            ? 'El número de tarjeta debe tener exactamente 16 dígitos'
+            : !RegExp(r'^\d{16}$').hasMatch(cardNumber)
+                ? 'El número de tarjeta solo puede contener números'
+                : null;
+  }
 }

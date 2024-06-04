@@ -11,7 +11,7 @@ class SlideInCart extends StatefulWidget {
   const SlideInCart({super.key});
 
   @override
-  _SlideInCartState createState() => _SlideInCartState();
+  State<SlideInCart> createState() => _SlideInCartState();
 }
 
 class _SlideInCartState extends State<SlideInCart> with SingleTickerProviderStateMixin {
