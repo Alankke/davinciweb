@@ -1,8 +1,7 @@
-// ignore_for_file: avoid_print
-
 import 'package:davinciweb/data/repositories/auth/authentication_repository.dart';
 import 'package:davinciweb/data/services/user_service.dart';
 import 'package:davinciweb/features/shop/screens/client/home.dart';
+import 'package:davinciweb/utils/constants/snackbars.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,11 +12,11 @@ class LogInController extends GetxController {
 
   final userService = Get.put(UserService());
 
-  //Form
+  // Form
   final email = TextEditingController();
   final password = TextEditingController();
 
-  //Lógicas
+  // Lógicas
   final hidePassword = true.obs;
   final isLoggedIn = false.obs;
   final localStorage = GetStorage();
@@ -34,14 +33,16 @@ class LogInController extends GetxController {
             userService.redirect();
       });
       print('Inicio de sesión exitoso');
+      DaVinciSnackBars.success('Inicio de sesión exitoso');
     } catch (e) {
       print('Error en el inicio de sesión $e');
+      DaVinciSnackBars.error('Se ha producido un error al intentar iniciar sesión, intente nuevamente más tarde');
     }
   }
 
   void logout() async {
     await FirebaseAuth.instance.signOut();
     isLoggedIn.value = false;
-    Get.to(const Home());
+    Get.offAll(() => const Home());
   }
 }
