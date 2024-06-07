@@ -58,7 +58,7 @@ class _SlideInCartState extends State<SlideInCart> with SingleTickerProviderStat
         child: Container(
           width: MediaQuery.of(context).size.width * 0.30,
           height: MediaQuery.of(context).size.height,
-          color: Colors.white,
+          color: DaVinciColors.lightContainer,
           child: Column(
             children: [
               AppBar(

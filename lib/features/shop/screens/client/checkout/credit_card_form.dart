@@ -16,6 +16,7 @@ class CreditCardForm extends StatelessWidget {
     return Form(
       key: controller.cardKey,
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text('Ingresa los datos de tu tarjeta:'),
@@ -82,7 +83,7 @@ class CreditCardForm extends StatelessWidget {
                   // El formulario contiene errores, no se procesa el pago
                 }
               },
-              child: const Text('Procesar Pago'),
+              child: const Text('Ok'),
             ),
           ),
         ],

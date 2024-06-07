@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SaleModel{
   //Aca State puede ser Cancelado, Pendiente, Abonado(retirado).
-  String id;
   String userId;
   String paymentMethod;
   String state;
@@ -12,7 +11,6 @@ class SaleModel{
   Timestamp timestamp;
 
   SaleModel({
-    required this.id,
     required this.userId,
     required this.paymentMethod,
     required this.state,
@@ -24,7 +22,6 @@ class SaleModel{
 
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
       'UserId': userId,
       'PaymentMethod': paymentMethod,
       'State': state,
@@ -36,7 +33,6 @@ class SaleModel{
   }
 
   static SaleModel emptySale() => SaleModel(
-    id: '',
     userId: '',
     paymentMethod: '',
     state: '',
@@ -50,7 +46,6 @@ class SaleModel{
     final data = document.data()!;
     if (document.data() != null) {
       return SaleModel(
-        id: document.id,
         userId: data['UserId'] ?? '',
         paymentMethod: data['PaymentMethod'] ?? '',
         state: data['State'] ?? '',
@@ -66,7 +61,6 @@ class SaleModel{
 
   factory SaleModel.fromMap(Map<String, dynamic> map) {
     return SaleModel(
-      id: map['id'],
       userId: map['UserId'],
       paymentMethod: map['PaymentMethod'],
       state: map['State'],

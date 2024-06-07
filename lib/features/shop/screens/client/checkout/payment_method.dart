@@ -27,10 +27,8 @@ class _PaymentMethodSectionState extends State<PaymentMethodSection> {
         ),
         const SizedBox(height: DaVinciSizes.spaceBtwItems),
         _buildPaymentOption(context, 'Efectivo', Icons.attach_money),
-        _buildPaymentOption(
-            context, 'Transferencia Bancaria', Icons.account_balance),
-        _buildPaymentOption(
-            context, 'Tarjeta de Crédito/Débito', Icons.credit_card),
+        _buildPaymentOption(context, 'Transferencia Bancaria', Icons.account_balance),
+        _buildPaymentOption(context, 'Tarjeta de Crédito/Débito', Icons.credit_card),
         const SizedBox(height: DaVinciSizes.spaceBtwItems)
       ],
     );
@@ -69,7 +67,7 @@ class _PaymentMethodSectionState extends State<PaymentMethodSection> {
       showDialog(
           context: context,
           builder: (context) => AlertDialog(
-                title: const Text('Has seleccionado efectivo'),
+                title: const Text('Has seleccionado efectivo', style: DaVinciTextStyles.payment),
                 actions: [
                   TextButton(
                     onPressed: () {
@@ -83,7 +81,7 @@ class _PaymentMethodSectionState extends State<PaymentMethodSection> {
       showDialog(
           context: context,
           builder: (context) => AlertDialog(
-                title: const Text('Has seleccionado Transferencia bancaria'),
+                title: const Text('Has seleccionado Transferencia bancaria', style: DaVinciTextStyles.payment),
                 actions: [
                   TextButton(
                     onPressed: () {
@@ -98,7 +96,7 @@ class _PaymentMethodSectionState extends State<PaymentMethodSection> {
       showDialog(
           context: context,
           builder: (context) => const AlertDialog(
-                title: const Text('Has seleccionado Tarjeta de Crédito/Débito'),
+                title: const Text('Has seleccionado Tarjeta de Crédito/Débito', style: DaVinciTextStyles.payment),
                 content: const CreditCardForm(),
               ));
     } else {
