@@ -85,5 +85,8 @@ class DaVinciTextStyles {
       fontSize: DaVinciSizes.lg,
       fontFamily: 'Merriweather');
 
-    
+  static const TextStyle payment = TextStyle(
+      color: DaVinciColors.textPrimary,
+      fontSize: 20,
+      fontFamily: 'Merriweather');
 }

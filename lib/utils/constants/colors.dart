@@ -25,17 +25,17 @@ class DaVinciColors {
   static const Color lightContainer = Color(0xFFF6F6F6);
   static Color darkContainer = Colors.black.withOpacity(0.1);
 
-  static const Color buttonPrimary = Color.fromARGB(248, 168, 19, 19);
+  static const Color buttonPrimary = Color.fromARGB(255, 168, 19, 19);
   static const Color buttonSecondary = Color(0xFF4B68FF);
   static const Color buttonDisabled = Color(0xFFC4C4C4);
 
   static const Color borderPrimary = Color(0xFFD9D9D9);
   static const Color borderSecondary = Color(0xFFE6E6E6);
 
-  static const Color error = Color(0xFFD32F2F);
-  static const Color success = Color(0xFF388E3C);
-  static const Color warning = Color(0xFFF57C00);
-  static const Color info = Color(0xFF1976D2);
+  static const Color error = Color.fromARGB(150, 211, 47, 47);
+  static const Color success = Color.fromARGB(150, 56, 142, 60);
+  static const Color warning = Color.fromARGB(149, 245, 208, 0);
+  static const Color info = Color.fromARGB(150, 25, 118, 210);
 
   static const Color black = Color(0xFF232323);
   static const Color darkerGrey = Color(0xFF4F4F4F);
