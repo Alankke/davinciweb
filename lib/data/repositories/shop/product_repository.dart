@@ -2,6 +2,7 @@
 
 import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:davinciweb/features/shop/controllers/product/product_controller.dart';
 import 'package:davinciweb/features/shop/models/product_model.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
@@ -22,16 +23,24 @@ class ProductRepository extends GetxController {
   }
 
   //Read
-  Future<List<ProductModel>> getProductsFromFirestore() async {
+     Future<PaginatedProducts> getProductsFromFirestore(
+      {int limit = 12, DocumentSnapshot? startAfter}) async {
     try {
-      final querySnapshot = await _db.collection('Products').get();
+      Query query = _db.collection('Products').limit(limit);
+      if (startAfter != null) {
+        query = query.startAfterDocument(startAfter);
+      }
+      final querySnapshot = await query.get();
       final products = querySnapshot.docs
-          .map((doc) => ProductModel.fromSnapshot(doc))
+          .map((doc) => ProductModel.fromSnapshot(doc as QueryDocumentSnapshot<Map<String, dynamic>>))
           .toList();
-      return products;
+      return PaginatedProducts(
+        products,
+        querySnapshot.docs.isNotEmpty ? querySnapshot.docs.last : null,
+      );
     } catch (error) {
       print('Error trayendo productos desde Firestore: $error');
-      return []; // Devuelve una lista vacía en caso de error
+      return PaginatedProducts([], null);
     }
   }
 
