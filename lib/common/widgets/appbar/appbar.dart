@@ -57,7 +57,8 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                     'Lentes de contacto',
                     'Anteojos de sol',
                     'Anteojos de receta',
-                    'Accesorios'
+                    'Accesorios',
+                    'Quitar filtro'
                   ].map((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
@@ -65,7 +66,9 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                     );
                   }).toList(),
                   onChanged: (value) {
-                    if (value != null) {
+                    if (value == 'Quitar filtro') {
+                      productController.setCategory('');
+                    } else if (value != null){
                       productController.setCategory(value);
                     }
                   },
