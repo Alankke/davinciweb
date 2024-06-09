@@ -4,6 +4,8 @@ import 'package:davinciweb/features/authentication/controllers/login/login_contr
 import 'package:davinciweb/features/authentication/screens/login/login.dart';
 import 'package:davinciweb/features/authentication/screens/signup/signup.dart';
 import 'package:davinciweb/features/shop/controllers/cart/cart_controller.dart';
+import 'package:davinciweb/features/shop/controllers/product/product_controller.dart';
+import 'package:davinciweb/features/shop/models/product_model.dart';
 import 'package:davinciweb/features/shop/screens/client/home.dart';
 import 'package:davinciweb/utils/constants/colors.dart';
 import 'package:davinciweb/utils/constants/sizes.dart';
@@ -16,6 +18,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   final loginController = Get.put(LogInController());
   final cartController = Get.put(CartController());
+  final productController = Get.put(ProductController());
   OverlayEntry? cartOverlayEntry;
   final cart = const SlideInCart();
 
@@ -42,16 +45,13 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           preferredSize: preferredSize,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: DaVinciSizes.md),
-            // Botones
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                // Contacto
                 TextButton(
-                    onPressed: () => Get.to(const Home()), // Llevar al footer
+                    onPressed: () => Get.to(const Home()),
                     child: const Text('Contacto',
                         style: DaVinciTextStyles.appBarTextStyleSm)),
-                // Productos
                 DropdownButton<String>(
                   items: <String>[
                     'Lentes de contacto',
@@ -64,13 +64,16 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                       child: Text(value),
                     );
                   }).toList(),
-                  onChanged: (_) {},
+                  onChanged: (value) {
+                    if (value != null) {
+                      productController.setCategory(value);
+                    }
+                  },
                   hint: const Text('Productos',
                       style: DaVinciTextStyles.appBarTextStyleSm),
                 ),
-                // Medios
                 TextButton(
-                    onPressed: () => Get.to(const Home()), // Llevar al footer
+                    onPressed: () => Get.to(const Home()),
                     child: const Text('Medios de pago',
                         style: DaVinciTextStyles.appBarTextStyleSm))
               ],
@@ -79,18 +82,15 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
-  // Acciones para el usuario logueado
   List<Widget> _buildLoggedInActions(BuildContext context) {
     return [
       Stack(children: [
-        // Icono carrito
         IconButton(
           icon: const Icon(Icons.shopping_cart, color: DaVinciColors.light),
           onPressed: () {
             toggleCartOverlay(context);
           },
         ),
-        // Contador de items
         Positioned(
           right: 0,
           child: Obx(() {
@@ -114,7 +114,6 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
     ];
   }
 
-  // Acciones para el usuario no logueado
   List<Widget> _buildLoggedOutActions(BuildContext context) {
     return [
       TextButton(
@@ -130,7 +129,6 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
     ];
   }
 
-  // Animación de carrito de compras
   void toggleCartOverlay(BuildContext context) {
     if (cartOverlayEntry == null) {
       cartOverlayEntry = createCartOverlayEntry(context);

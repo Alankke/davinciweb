@@ -3,7 +3,6 @@
 import 'package:davinciweb/features/shop/controllers/product/create_product_controller.dart';
 import 'package:davinciweb/utils/constants/colors.dart';
 import 'package:davinciweb/utils/constants/sizes.dart';
-import 'package:davinciweb/utils/enums/product_categories.dart';
 import 'package:davinciweb/utils/validators/validation.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
@@ -42,8 +41,12 @@ class CreateProductForm extends StatelessWidget {
                       child: Obx(() {
                         final networkImage = controller.product.value.picture;
                         return networkImage.isEmpty
-                            ? const Icon(Icons.landscape, color: DaVinciColors.dark)
-                            : controller.isLoading.value == true ? const Center(child: CircularProgressIndicator()) : Image.network(networkImage);
+                            ? const Icon(Icons.landscape,
+                                color: DaVinciColors.dark)
+                            : controller.isLoading.value == true
+                                ? const Center(
+                                    child: CircularProgressIndicator())
+                                : Image.network(networkImage);
                       }),
                     ),
                   );
@@ -71,24 +74,27 @@ class CreateProductForm extends StatelessWidget {
                       border: OutlineInputBorder())),
               const SizedBox(height: DaVinciSizes.spaceBtwItems),
               //Categoría producto
-              DropdownButtonFormField<ProductCategory>(
-                value: controller.category,
-                onChanged: (ProductCategory? newValue) {
+              DropdownButtonFormField<String>(
+                onChanged: (String? newValue) {
                   controller.category = newValue!;
                 },
                 validator: (value) => DaVinciValidator.validateEmptyText(
-                    'Categoría del product', value.toString()),
+                    'Categoría del producto', value.toString()),
                 decoration: const InputDecoration(
                   labelText: 'Categoría del producto',
                   prefixIcon: Icon(Icons.category_outlined),
                   border: OutlineInputBorder(),
                 ),
-                items: ProductCategory.values
-                    .map<DropdownMenuItem<ProductCategory>>(
-                        (ProductCategory category) {
-                  return DropdownMenuItem<ProductCategory>(
-                      value: category,
-                      child: Text(category.toString().split('.').last));
+                items: <String>[
+                  'Lentes de contacto',
+                  'Anteojos de sol',
+                  'Anteojos de receta',
+                  'Accesorios',
+                ].map<DropdownMenuItem<String>>((String category) {
+                  return DropdownMenuItem<String>(
+                    value: category,
+                    child: Text(category),
+                  );
                 }).toList(),
               ),
               const SizedBox(height: DaVinciSizes.spaceBtwItems),

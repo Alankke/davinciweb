@@ -24,10 +24,12 @@ class ProductRepository extends GetxController {
 
   //Read
      Future<PaginatedProducts> getProductsFromFirestore(
-      {int limit = 12, DocumentSnapshot? startAfter}) async {
+      {int limit = 12, DocumentSnapshot? startAfter, String category = ''}) async {
     try {
       Query query = _db.collection('Products').limit(limit);
-      if (startAfter != null) {
+      if (category.isNotEmpty) {
+        query = query.where('Category', isEqualTo: category);
+      } else if (startAfter != null) {
         query = query.startAfterDocument(startAfter);
       }
       final querySnapshot = await query.get();

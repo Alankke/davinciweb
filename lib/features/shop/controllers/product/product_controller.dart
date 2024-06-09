@@ -17,17 +17,20 @@ class ProductController extends GetxController {
   final int productsPerPage = 12;
   DocumentSnapshot? lastProductDocument;
 
+  //Filtrado
+  final selectedCategory = ''.obs;
+
   @override
   void onInit() {
     fetchInitialProducts();
     super.onInit();
   }
 
-  Future<void> fetchInitialProducts() async {
+  Future<void> fetchInitialProducts({String category = ''}) async {
     try {
       isLoading.value = true;
       final result = await productRepository.getProductsFromFirestore(
-          limit: productsPerPage);
+          limit: productsPerPage, category: category);
       products.assignAll(result.products);
       lastProductDocument = result.lastDocument;
       hasMoreProducts.value = result.products.length == productsPerPage;
@@ -44,7 +47,7 @@ class ProductController extends GetxController {
     try {
       isLoading.value = true;
       final result = await productRepository.getProductsFromFirestore(
-          limit: productsPerPage, startAfter: lastProductDocument);
+          limit: productsPerPage, startAfter: lastProductDocument, category: selectedCategory.value);
       products.addAll(result.products);
       lastProductDocument = result.lastDocument;
       hasMoreProducts.value = result.products.length == productsPerPage;
@@ -53,6 +56,11 @@ class ProductController extends GetxController {
     } finally {
       isLoading.value = false;
     }
+  }
+
+  void setCategory (String category){
+    selectedCategory.value = category;
+    fetchInitialProducts(category: category);
   }
 }
 

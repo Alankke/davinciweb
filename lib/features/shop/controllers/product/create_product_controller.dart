@@ -1,7 +1,7 @@
 // ignore_for_file: avoid_print
 import 'package:davinciweb/data/repositories/shop/product_repository.dart';
 import 'package:davinciweb/features/shop/models/product_model.dart';
-import 'package:davinciweb/utils/enums/product_categories.dart';
+import 'package:davinciweb/utils/constants/snackbars.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -18,7 +18,7 @@ class CreateProductController extends GetxController {
   //Form
   final name = TextEditingController();
   final price = TextEditingController();
-  ProductCategory category = ProductCategory.noCategory;
+  String category = '';
   String picture = '';
 
   //Selecciona la imagen con el paquete y actualiza la imagen actual con método.
@@ -50,6 +50,7 @@ class CreateProductController extends GetxController {
 
         await productRepository.saveProductRecord(newProduct);
         print('Producto creado con éxito');
+        DaVinciSnackBars.success('Producto creado con éxito');
       } else {
         print('El valor de productKey es nulo');
       }
