@@ -32,10 +32,8 @@ class LogInController extends GetxController {
             isLoggedIn.value = true;
             userService.redirect();
       });
-      print('Inicio de sesión exitoso');
       DaVinciSnackBars.success('Inicio de sesión exitoso');
     } catch (e) {
-      print('Error en el inicio de sesión $e');
       DaVinciSnackBars.error('Se ha producido un error al intentar iniciar sesión, intente nuevamente más tarde');
     }
   }

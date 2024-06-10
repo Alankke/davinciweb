@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'package:davinciweb/data/repositories/auth/authentication_repository.dart';
 import 'package:davinciweb/features/authentication/models/user_model.dart';
 import 'package:get/get.dart';
@@ -20,7 +18,6 @@ class UserRepository extends GetxController {
     try {
       await _db.collection("Users").doc(user.id).set(user.toJson());
     } catch (e) {
-      print("Error producido $e");
       throw 'Se produjo un error y no se pudo registrar en la base de datos $e';
     }
   }
@@ -38,7 +35,6 @@ class UserRepository extends GetxController {
         _user.value = UserModel.emptyUser();
       }
     } catch (e) {
-      print("Error producido $e");
       throw 'Se produjo un error y no se pudo registrar en la base de datos';
     }
   }
@@ -51,7 +47,6 @@ class UserRepository extends GetxController {
           .doc(targetUser.id)
           .update(targetUser.toJson());
     } catch (e) {
-      print("Error producido $e");
       throw 'Se produjo un error y no se pudo registrar en la base de datos';
     }
   }
@@ -63,7 +58,6 @@ class UserRepository extends GetxController {
           .doc(AuthenticationRepository.instance.authUser?.uid)
           .update(json);
     } catch (e) {
-      print("Error producido $e");
       throw 'Se produjo un error y no se pudo registrar en la base de datos';
     }
   }
@@ -73,7 +67,6 @@ class UserRepository extends GetxController {
     try {
       await _db.collection("Users").doc(userId).delete();
     } catch (e) {
-      print("Error producido $e");
       throw 'Se produjo un error y no se pudo registrar en la base de datos';
     }
   }
@@ -84,7 +77,6 @@ class UserRepository extends GetxController {
       await ref.putFile(File(image.path));
       return await ref.getDownloadURL();
     } catch (e) {
-      print("Error producido $e");
       throw 'Se produjo un error y no se pudo subir su imagen en la base de datos';
     }
   }

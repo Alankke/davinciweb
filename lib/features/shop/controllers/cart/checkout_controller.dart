@@ -51,7 +51,6 @@ class CheckoutController extends GetxController {
       this.generatedCode.value = generatedCode; // Actualiza el código generado
       DaVinciSnackBars.success('Su compra se ha registrado, este es su código para el retiro $generatedCode');
     } catch (e) {
-      print('Error al crear venta $e');
       DaVinciSnackBars.error('Se ha producido un error, intente nuevamente más tarde');
     }
   }

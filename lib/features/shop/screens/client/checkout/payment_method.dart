@@ -96,8 +96,8 @@ class _PaymentMethodSectionState extends State<PaymentMethodSection> {
       showDialog(
           context: context,
           builder: (context) => const AlertDialog(
-                title: const Text('Has seleccionado Tarjeta de Crédito/Débito', style: DaVinciTextStyles.payment),
-                content: const CreditCardForm(),
+                title: Text('Has seleccionado Tarjeta de Crédito/Débito', style: DaVinciTextStyles.payment),
+                content: CreditCardForm(),
               ));
     } else {
       const Text('Error');

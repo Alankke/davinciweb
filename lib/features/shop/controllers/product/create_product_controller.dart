@@ -1,4 +1,3 @@
-// ignore_for_file: avoid_print
 import 'package:davinciweb/data/repositories/shop/product_repository.dart';
 import 'package:davinciweb/features/shop/models/product_model.dart';
 import 'package:davinciweb/utils/constants/snackbars.dart';
@@ -49,10 +48,8 @@ class CreateProductController extends GetxController {
         };
 
         await productRepository.saveProductRecord(newProduct);
-        print('Producto creado con éxito');
         DaVinciSnackBars.success('Producto creado con éxito');
       } else {
-        print('El valor de productKey es nulo');
       }
     } on Exception catch (e) {
       throw 'Se produjo un error al crear su producto $e';

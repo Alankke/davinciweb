@@ -35,7 +35,7 @@ class ProductController extends GetxController {
       lastProductDocument = result.lastDocument;
       hasMoreProducts.value = result.products.length == productsPerPage;
     } catch (error) {
-      print('Error fetching products: $error');
+      throw 'Hubo un error al traer los productos $error';
     } finally {
       isLoading.value = false;
     }
@@ -52,7 +52,7 @@ class ProductController extends GetxController {
       lastProductDocument = result.lastDocument;
       hasMoreProducts.value = result.products.length == productsPerPage;
     } catch (error) {
-      print('Error fetching more products: $error');
+      throw 'Hubo un error al intentar traer mas productos $error';
     } finally {
       isLoading.value = false;
     }

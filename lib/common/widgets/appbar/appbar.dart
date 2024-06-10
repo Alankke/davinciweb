@@ -5,7 +5,6 @@ import 'package:davinciweb/features/authentication/screens/login/login.dart';
 import 'package:davinciweb/features/authentication/screens/signup/signup.dart';
 import 'package:davinciweb/features/shop/controllers/cart/cart_controller.dart';
 import 'package:davinciweb/features/shop/controllers/product/product_controller.dart';
-import 'package:davinciweb/features/shop/models/product_model.dart';
 import 'package:davinciweb/features/shop/screens/client/home.dart';
 import 'package:davinciweb/utils/constants/colors.dart';
 import 'package:davinciweb/utils/constants/sizes.dart';

@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:davinciweb/features/shop/controllers/product/product_controller.dart';
@@ -41,7 +39,6 @@ class ProductRepository extends GetxController {
         querySnapshot.docs.isNotEmpty ? querySnapshot.docs.last : null,
       );
     } catch (error) {
-      print('Error trayendo productos desde Firestore: $error');
       return PaginatedProducts([], null);
     }
   }

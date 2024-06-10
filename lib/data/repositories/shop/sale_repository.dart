@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:davinciweb/features/shop/models/sale_model.dart';
 import 'package:get/get.dart';
@@ -25,7 +23,6 @@ class SaleRepository {
           .toList();
       return products;
     } catch (error) {
-      print('Error trayendo ventas desde Firestore: $error');
       return []; // Devuelve una lista vacía en caso de error
     }
   }
