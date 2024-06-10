@@ -1,1 +1,25 @@
-{"flutter":{"platforms":{"dart":{"lib/firebase_options.dart":{"projectId":"davinciweb-3e35f","configurations":{"web":"1:367499569708:web:3638ca61e94b311d9b3f89"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "davinciweb-3e35f",
+          "configurations": {
+            "web": "1:367499569708:web:3638ca61e94b311d9b3f89"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "source": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "frameworksBackend": {
+      "region": "us-east1"
+    }
+  }
+}
