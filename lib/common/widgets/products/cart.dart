@@ -1,4 +1,6 @@
+import 'package:davinciweb/features/authentication/controllers/login/login_controller.dart';
 import 'package:davinciweb/features/shop/screens/client/checkout/checkout_cart.dart';
+import 'package:davinciweb/utils/constants/snackbars.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:davinciweb/features/shop/controllers/cart/cart_controller.dart';
@@ -8,7 +10,7 @@ import 'package:davinciweb/utils/constants/text_style.dart';
 import 'package:davinciweb/utils/formatters/formatter.dart';
 
 class SlideInCart extends StatefulWidget {
-  const SlideInCart({super.key});
+  const SlideInCart({super.key,});
 
   @override
   State<SlideInCart> createState() => _SlideInCartState();
@@ -16,6 +18,7 @@ class SlideInCart extends StatefulWidget {
 
 class _SlideInCartState extends State<SlideInCart> with SingleTickerProviderStateMixin {
   final CartController cartController = Get.put(CartController());
+  final LogInController loginController = Get.put(LogInController());
   late AnimationController _animationController;
   late Animation<Offset> _animation;
 
@@ -113,7 +116,9 @@ class _SlideInCartState extends State<SlideInCart> with SingleTickerProviderStat
                 child: ElevatedButton(
                   onPressed: () {
                     cartController.toggleCartVisibility();
-                    Get.to(() => CheckoutCart());
+                    loginController.isLoggedIn.value 
+                      ? Get.to(() => CheckoutCart()) 
+                      : DaVinciSnackBars.warning('Debe iniciar sesión antes de finalizar su compra');                    
                   },
                   child: const Text('Finalizar compra'),
                 ),

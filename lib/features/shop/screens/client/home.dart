@@ -1,6 +1,6 @@
 import 'package:davinciweb/common/widgets/appbar/appbar.dart';
 import 'package:davinciweb/common/widgets/custom_shapes/footer.dart';
-import 'package:davinciweb/common/widgets/products/card_product.dart';
+import 'package:davinciweb/common/widgets/products/product_card.dart';
 import 'package:davinciweb/features/authentication/controllers/login/login_controller.dart';
 import 'package:davinciweb/features/shop/controllers/cart/cart_controller.dart';
 import 'package:davinciweb/features/shop/controllers/product/product_controller.dart';
