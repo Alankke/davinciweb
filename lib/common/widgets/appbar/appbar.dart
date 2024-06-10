@@ -1,4 +1,4 @@
-import 'package:davinciweb/common/widgets/custom_shapes/header.dart';
+import 'package:davinciweb/common/widgets/appbar/header.dart';
 import 'package:davinciweb/common/widgets/products/cart.dart';
 import 'package:davinciweb/features/authentication/controllers/login/login_controller.dart';
 import 'package:davinciweb/features/authentication/screens/login/login.dart';
@@ -125,6 +125,28 @@ List<Widget> _buildLoggedInActions(BuildContext context) {
 
   List<Widget> _buildLoggedOutActions(BuildContext context) {
     return [
+      Stack(children: [
+        IconButton(
+          icon: const Icon(Icons.shopping_cart, color: DaVinciColors.light),
+          onPressed: () {
+            toggleCartOverlay(context);
+          },
+        ),
+        Positioned(
+          right: 0,
+          child: Obx(() {
+            return Container(
+                alignment: Alignment.center,
+                width: 18,
+                height: 18,
+                decoration: BoxDecoration(
+                    color: DaVinciColors.darkerGrey,
+                    borderRadius: BorderRadius.circular(100)),
+                child: Text('${cartController.cartItems.length}',
+                    style: const TextStyle(color: DaVinciColors.light)));
+          }),
+        ),
+      ]),
       TextButton(
         onPressed: () => Get.to(const LogIn()),
         child: const Text('Iniciar sesión',

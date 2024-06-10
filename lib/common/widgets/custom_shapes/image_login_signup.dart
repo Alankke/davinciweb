@@ -11,8 +11,8 @@ class Logo extends StatelessWidget {
       children: [
         Image.asset(
           "assets/logos/davinciLogo.png",
-          height: MediaQuery.of(context).size.height / 2,
-          width: MediaQuery.of(context).size.width / 2,
+          height: MediaQuery.of(context).size.height * 0.65,
+          width: MediaQuery.of(context).size.width * 0.65,
         ),
       ],
     );
