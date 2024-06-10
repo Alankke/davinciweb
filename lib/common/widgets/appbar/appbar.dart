@@ -12,18 +12,22 @@ import 'package:davinciweb/utils/constants/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
-  HomeAppBar({super.key, this.cartOverlayEntry});
+class HomeAppBar extends StatelessWidget {
+  HomeAppBar({
+    super.key,
+    required this.productController,
+    required this.loginController,
+    required this.cartController
+  });
 
-  final loginController = Get.put(LogInController());
-  final cartController = Get.put(CartController());
-  final productController = Get.put(ProductController());
+  final ProductController productController;
+  final LogInController loginController;
+  final CartController cartController;
   OverlayEntry? cartOverlayEntry;
-  final cart = const SlideInCart();
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
+    return SliverAppBar(
       backgroundColor: DaVinciColors.midnight,
       automaticallyImplyLeading: false,
       flexibleSpace: const Header(),
@@ -41,9 +45,10 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         }),
       ],
       bottom: PreferredSize(
-          preferredSize: preferredSize,
+          preferredSize: const Size.fromHeight(50),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: DaVinciSizes.md),
+            padding: const EdgeInsets.symmetric(
+                horizontal: DaVinciSizes.md),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -67,7 +72,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                   onChanged: (value) {
                     if (value == 'Quitar filtro') {
                       productController.setCategory('');
-                    } else if (value != null){
+                    } else if (value != null) {
                       productController.setCategory(value);
                     }
                   },
@@ -81,10 +86,12 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
               ],
             ),
           )),
+      floating: true,
+      snap: true,
+      expandedHeight: 200.0,
     );
   }
-
-  List<Widget> _buildLoggedInActions(BuildContext context) {
+List<Widget> _buildLoggedInActions(BuildContext context) {
     return [
       Stack(children: [
         IconButton(
@@ -151,4 +158,5 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => const Size.fromHeight(200);
+
 }

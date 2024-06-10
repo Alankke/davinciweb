@@ -1,6 +1,8 @@
 import 'package:davinciweb/common/widgets/appbar/appbar.dart';
 import 'package:davinciweb/common/widgets/custom_shapes/footer.dart';
 import 'package:davinciweb/common/widgets/products/card_product.dart';
+import 'package:davinciweb/features/authentication/controllers/login/login_controller.dart';
+import 'package:davinciweb/features/shop/controllers/cart/cart_controller.dart';
 import 'package:davinciweb/features/shop/controllers/product/product_controller.dart';
 import 'package:davinciweb/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
@@ -11,18 +13,20 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(ProductController());
+    final productController = Get.put(ProductController());
+    final loginController = Get.put(LogInController());
+    final cartController = Get.put(CartController());
 
     return Scaffold(
-      appBar: HomeAppBar(),
       body: Obx(() {
-        if (controller.isLoading.value && controller.products.isEmpty) {
+        if (productController.isLoading.value && productController.products.isEmpty) {
           return const Center(child: CircularProgressIndicator());
-        } else if (controller.products.isEmpty) {
+        } else if (productController.products.isEmpty) {
           return const Center(child: Text('No hay productos disponibles'));
         } else {
           return CustomScrollView(
             slivers: [
+              HomeAppBar(productController: productController, loginController: loginController, cartController: cartController),
               SliverPadding(
                 padding: const EdgeInsets.all(DaVinciSizes.spaceBtwItems),
                 sliver: SliverGrid(
@@ -38,19 +42,19 @@ class Home extends StatelessWidget {
                   ),
                   delegate: SliverChildBuilderDelegate(
                     (BuildContext context, int index) {
-                      final product = controller.products[index];
+                      final product = productController.products[index];
                       return ProductCard(product: product);
                     },
-                    childCount: controller.products.length,
+                    childCount: productController.products.length,
                   ),
                 ),
               ),
               SliverToBoxAdapter(
-                child: controller.hasMoreProducts.value
+                child: productController.hasMoreProducts.value
                     ? Center(
                         child: ElevatedButton(
-                          onPressed: () => controller.fetchMoreProducts(),
-                          child: controller.isLoading.value
+                          onPressed: () => productController.fetchMoreProducts(),
+                          child: productController.isLoading.value
                               ? const CircularProgressIndicator()
                               : const Text('Cargar más'),
                         ),
