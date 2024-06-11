@@ -1,9 +1,7 @@
-import 'package:davinciweb/features/authentication/controllers/login/login_controller.dart';
 import 'package:davinciweb/features/shop/models/product_model.dart';
 import 'package:get/get.dart';
 
 class CartController extends GetxController {
-  final loginController = Get.lazyPut(() => LogInController());
   var cartItems = <ProductModel>[].obs;
   var isCartVisible = false.obs;
 
