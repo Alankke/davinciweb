@@ -1,3 +1,4 @@
+import 'package:davinciweb/utils/constants/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -8,7 +9,7 @@ class DaVinciHelpersFunctions {
         context: Get.context!,
         builder: (BuildContext context) {
           return AlertDialog(
-              title: Text(title),
+              title: Text(title, style: DaVinciTextStyles.dialogTitle,),
               content: Text(message),
               actions: [
                 TextButton(

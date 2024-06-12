@@ -1,8 +1,9 @@
-import 'package:davinciweb/utils/constants/text_style.dart';
-import 'package:davinciweb/common/widgets/appbar/admin_appbar.dart';
+import 'package:davinciweb/features/shop/screens/admin/CRUD/manage_products.dart';
 import 'package:davinciweb/features/shop/screens/admin/CRUD/create_product.dart';
 import 'package:davinciweb/features/shop/screens/client/home.dart';
+import 'package:davinciweb/utils/constants/text_style.dart';
 import 'package:davinciweb/utils/constants/colors.dart';
+import 'package:davinciweb/common/widgets/appbar/admin_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -32,7 +33,7 @@ class AdminHome extends StatelessWidget {
                 title: const Text('Administrar productos',
                     style: DaVinciTextStyles.drawer),
                 onTap: () =>
-                    Get.to(const Home()) //Crear pantalla de lista de productos
+                    Get.to(const ManageProducts()) //Crear pantalla de lista de productos
                 ),
             ListTile(
                 leading: const Icon(Icons.sell_outlined,

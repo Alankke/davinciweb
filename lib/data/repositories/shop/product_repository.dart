@@ -11,7 +11,7 @@ class ProductRepository extends GetxController {
 
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
-  //Create
+  //Crear producto y guardarlo en firestore
   Future<void> saveProductRecord(Map<String, dynamic> json) async {
     try {
       await _db.collection("Products").add(json);
@@ -20,7 +20,7 @@ class ProductRepository extends GetxController {
     }
   }
 
-  //Read
+  //Leer los productos desde firestore
      Future<PaginatedProducts> getProductsFromFirestore(
       {int limit = 12, DocumentSnapshot? startAfter, String category = ''}) async {
     try {
@@ -43,7 +43,7 @@ class ProductRepository extends GetxController {
     }
   }
 
-  //Update
+  //Subir la imagen a firebase storage
   Future<String> uploadImage(String path, XFile image) async {
     try {
       final ref = FirebaseStorage.instance.ref(path).child(image.name);
@@ -55,13 +55,22 @@ class ProductRepository extends GetxController {
     }
   }
 
-  //Update
+  //Actualizar un solo campo del producto y guardarlo en firestore
   Future<void> updateSingleField(
       Map<String, dynamic> json, String productId) async {
     try {
-      await _db.collection("Products").doc().update(json);
+      await _db.collection("Products").doc(productId).update(json);
     } catch (e) {
       throw 'Hubieron errores en la actualización de campos en firestore: $e';
+    }
+  }
+
+  //Eliminar el producto de firestore
+  Future<void> deleteProduct(String productId) async {
+    try {
+      await _db.collection("Products").doc(productId).delete();
+    } catch (e) {
+      throw 'Hubo un error al eliminar el producto $e';
     }
   }
 }

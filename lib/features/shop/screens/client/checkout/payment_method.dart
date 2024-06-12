@@ -2,6 +2,7 @@ import 'package:davinciweb/features/shop/controllers/cart/checkout_controller.da
 import 'package:davinciweb/features/shop/screens/client/checkout/credit_card_form.dart';
 import 'package:davinciweb/utils/constants/sizes.dart';
 import 'package:davinciweb/utils/constants/text_style.dart';
+import 'package:davinciweb/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,8 +14,7 @@ class PaymentMethodSection extends StatefulWidget {
 }
 
 class _PaymentMethodSectionState extends State<PaymentMethodSection> {
-  final controller =
-      Get.put(CheckoutController());
+  final controller = Get.put(CheckoutController());
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +27,17 @@ class _PaymentMethodSectionState extends State<PaymentMethodSection> {
         ),
         const SizedBox(height: DaVinciSizes.spaceBtwItems),
         _buildPaymentOption(context, 'Efectivo', Icons.attach_money),
-        _buildPaymentOption(context, 'Transferencia Bancaria', Icons.account_balance),
-        _buildPaymentOption(context, 'Tarjeta de Crédito/Débito', Icons.credit_card),
+        _buildPaymentOption(
+            context, 'Transferencia Bancaria', Icons.account_balance),
+        _buildPaymentOption(
+            context, 'Tarjeta de Crédito/Débito', Icons.credit_card),
         const SizedBox(height: DaVinciSizes.spaceBtwItems)
       ],
     );
   }
 
-  Widget _buildPaymentOption(BuildContext context, String title, IconData icon) {
+  Widget _buildPaymentOption(
+      BuildContext context, String title, IconData icon) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: DaVinciSizes.xs),
       decoration: BoxDecoration(
@@ -64,24 +67,14 @@ class _PaymentMethodSectionState extends State<PaymentMethodSection> {
   void _buildPaymentDetails(BuildContext context) {
     final selectedMethod = controller.selectedPaymentMethod.value;
     if (selectedMethod == 'Efectivo') {
-      showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-                title: const Text('Has seleccionado efectivo', style: DaVinciTextStyles.payment),
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: const Text('OK'),
-                  ),
-                ],
-              ));
+      DaVinciHelpersFunctions.showAlert('Has seleccionado efectivo',
+          'Deberás abonar en la sucursal cuando retires tu compra');
     } else if (selectedMethod == 'Transferencia Bancaria') {
       showDialog(
           context: context,
           builder: (context) => AlertDialog(
-                title: const Text('Has seleccionado Transferencia bancaria', style: DaVinciTextStyles.payment),
+                title: const Text('Has seleccionado Transferencia bancaria',
+                    style: DaVinciTextStyles.dialogTitle),
                 actions: [
                   TextButton(
                     onPressed: () {
@@ -96,7 +89,8 @@ class _PaymentMethodSectionState extends State<PaymentMethodSection> {
       showDialog(
           context: context,
           builder: (context) => const AlertDialog(
-                title: Text('Has seleccionado Tarjeta de Crédito/Débito', style: DaVinciTextStyles.payment),
+                title: Text('Has seleccionado Tarjeta de Crédito/Débito',
+                    style: DaVinciTextStyles.dialogTitle),
                 content: CreditCardForm(),
               ));
     } else {

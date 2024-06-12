@@ -73,6 +73,7 @@ class CreateProductForm extends StatelessWidget {
               const SizedBox(height: DaVinciSizes.spaceBtwItems),
               //Categoría producto
               DropdownButtonFormField<String>(
+                value: controller.category.isNotEmpty ? controller.category : null,
                 onChanged: (String? newValue) {
                   controller.category = newValue!;
                 },
@@ -98,7 +99,7 @@ class CreateProductForm extends StatelessWidget {
               const SizedBox(height: DaVinciSizes.spaceBtwItems),
               //Guardar producto
               ElevatedButton(
-                  onPressed: () => controller.createProduct(),
+                  onPressed: () => controller.saveProduct(),
                   child: const Text('Guardar producto'))
             ],
           ),
@@ -107,3 +108,4 @@ class CreateProductForm extends StatelessWidget {
     );
   }
 }
+

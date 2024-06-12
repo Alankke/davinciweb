@@ -46,12 +46,12 @@ class DaVinciTextStyles {
   static const TextStyle homeLarge = TextStyle(
       color: DaVinciColors.textPrimary,
       fontSize: DaVinciSizes.xl,
-      fontFamily: 'Playfair');  
+      fontFamily: 'Playfair');
 
   static const TextStyle homeLargeMerr = TextStyle(
       color: DaVinciColors.textPrimary,
       fontSize: DaVinciSizes.xl,
-      fontFamily: 'Merriweather'); 
+      fontFamily: 'Merriweather');
 
   static const TextStyle detailsMd = TextStyle(
       color: DaVinciColors.textPrimary,
@@ -85,7 +85,7 @@ class DaVinciTextStyles {
       fontSize: DaVinciSizes.lg,
       fontFamily: 'Merriweather');
 
-  static const TextStyle payment = TextStyle(
+  static const TextStyle dialogTitle = TextStyle(
       color: DaVinciColors.textPrimary,
       fontSize: 20,
       fontFamily: 'Merriweather');

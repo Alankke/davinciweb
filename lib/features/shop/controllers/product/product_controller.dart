@@ -9,11 +9,11 @@ class ProductController extends GetxController {
   final RxList<ProductModel> products = <ProductModel>[].obs;
   final productRepository = Get.put(ProductRepository());
 
-  // Controla el estado de la carga
+  // Controla el estado de la carga (Renderizado)
   final isLoading = false.obs;
   final hasMoreProducts = true.obs;
 
-  // Número de productos por lote
+  // Número de productos por lote (Renderizado)
   final int productsPerPage = 12;
   DocumentSnapshot? lastProductDocument;
 
@@ -25,7 +25,9 @@ class ProductController extends GetxController {
     fetchInitialProducts();
     super.onInit();
   }
-
+  
+  //Método para traer inicialmente 12 productos
+  //(para llenar una grilla de 4x3 y para administración de productos)
   Future<void> fetchInitialProducts({String category = ''}) async {
     try {
       isLoading.value = true;
@@ -41,6 +43,8 @@ class ProductController extends GetxController {
     }
   }
 
+  //Método para traer mas productos desde la base de datos
+  //(para grilla de 4x3 y para administración de productos)
   Future<void> fetchMoreProducts() async {
     if (isLoading.value || !hasMoreProducts.value) return;
 
@@ -57,10 +61,20 @@ class ProductController extends GetxController {
       isLoading.value = false;
     }
   }
-
+  
   void setCategory (String category){
     selectedCategory.value = category;
     fetchInitialProducts(category: category);
+  }
+
+  //Eliminar producto de firestore
+  Future<void> deleteProduct(String productId) async {
+    try {
+      await productRepository.deleteProduct(productId);
+      products.removeWhere((product) => product.id == productId);
+    } catch (error) {
+      throw 'Hubo un error al eliminar el producto $error';
+    }
   }
 }
 
