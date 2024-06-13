@@ -12,7 +12,7 @@ import 'package:davinciweb/utils/constants/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomeAppBar extends StatelessWidget {
+class HomeAppBar extends StatelessWidget{
   HomeAppBar({
     super.key,
     required this.productController,
@@ -45,7 +45,7 @@ class HomeAppBar extends StatelessWidget {
         }),
       ],
       bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(50),
+          preferredSize: const Size.fromHeight(75),
           child: Padding(
             padding: const EdgeInsets.symmetric(
                 horizontal: DaVinciSizes.md),
@@ -88,10 +88,10 @@ class HomeAppBar extends StatelessWidget {
           )),
       floating: true,
       snap: true,
-      expandedHeight: 200.0,
+      expandedHeight: 100,
     );
   }
-List<Widget> _buildLoggedInActions(BuildContext context) {
+  List<Widget> _buildLoggedInActions(BuildContext context) {
     return [
       Stack(children: [
         IconButton(
@@ -177,8 +177,4 @@ List<Widget> _buildLoggedInActions(BuildContext context) {
       ),
     );
   }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(200);
-
 }
