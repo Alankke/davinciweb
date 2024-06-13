@@ -1,5 +1,4 @@
 import 'package:davinciweb/common/widgets/appbar/header.dart';
-import 'package:davinciweb/common/widgets/products/cart.dart';
 import 'package:davinciweb/features/authentication/controllers/login/login_controller.dart';
 import 'package:davinciweb/features/authentication/screens/login/login.dart';
 import 'package:davinciweb/features/authentication/screens/signup/signup.dart';
@@ -12,8 +11,8 @@ import 'package:davinciweb/utils/constants/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomeAppBar extends StatelessWidget{
-  HomeAppBar({
+class HomeAppBar extends StatelessWidget {
+  const HomeAppBar({
     super.key,
     required this.productController,
     required this.loginController,
@@ -23,7 +22,6 @@ class HomeAppBar extends StatelessWidget{
   final ProductController productController;
   final LogInController loginController;
   final CartController cartController;
-  OverlayEntry? cartOverlayEntry;
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +95,7 @@ class HomeAppBar extends StatelessWidget{
         IconButton(
           icon: const Icon(Icons.shopping_cart, color: DaVinciColors.light),
           onPressed: () {
-            toggleCartOverlay(context);
+            cartController.toggleCartVisibility(context);
           },
         ),
         Positioned(
@@ -129,7 +127,7 @@ class HomeAppBar extends StatelessWidget{
         IconButton(
           icon: const Icon(Icons.shopping_cart, color: DaVinciColors.light),
           onPressed: () {
-            toggleCartOverlay(context);
+            cartController.toggleCartVisibility(context);
           },
         ),
         Positioned(
@@ -158,23 +156,5 @@ class HomeAppBar extends StatelessWidget{
             style: DaVinciTextStyles.appBarTextStyleMd),
       ),
     ];
-  }
-
-  void toggleCartOverlay(BuildContext context) {
-    if (cartOverlayEntry == null) {
-      cartOverlayEntry = createCartOverlayEntry(context);
-      Overlay.of(context).insert(cartOverlayEntry!);
-    }
-    cartController.toggleCartVisibility();
-  }
-
-  OverlayEntry createCartOverlayEntry(BuildContext context) {
-    return OverlayEntry(
-      builder: (context) => const Positioned(
-        top: 0,
-        right: 0,
-        child: SlideInCart(),
-      ),
-    );
   }
 }
