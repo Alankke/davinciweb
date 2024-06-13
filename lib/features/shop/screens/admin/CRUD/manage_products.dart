@@ -41,8 +41,13 @@ class ManageProducts extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     IconButton(
-                      icon: const Icon(Icons.edit, color: Colors.blue),
-                      onPressed: () => Get.to(() => const CreateProduct(), arguments: product),                      
+                      icon: const Icon(Icons.edit_outlined, color: DaVinciColors.primary),
+                      onPressed: () async {
+                        var result = await Get.to(() => const CreateProduct(), arguments: product);
+                        if (result != null && result) {
+                          productController.fetchInitialProducts(); // Actualiza los productos después de editar
+                        }
+                      },
                     ),
                     IconButton(
                       icon: const Icon(Icons.delete_outline,
@@ -51,11 +56,16 @@ class ManageProducts extends StatelessWidget {
                         showDialog(
                           context: context,
                           builder: (context) => AlertDialog(
-                            title: const Text('Confirmar acción', style: DaVinciTextStyles.dialogTitle,),
+                            title: const Text('Confirmar acción', style: DaVinciTextStyles.dialogTitle),
                             content: const Text('¿Estas seguro de que quieres eliminar el producto?'),
                             actions: [
                               TextButton(onPressed: ()=> Navigator.of(context).pop(), child: const Text('Cancelar')),
-                              TextButton(onPressed:() =>  productController.deleteProduct(product.id), child: const Text('Eliminar'))
+                              TextButton(
+                                onPressed:() async {
+                                  await productController.deleteProduct(product.id);
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text('Eliminar'))
                             ],
                           )
                         );
