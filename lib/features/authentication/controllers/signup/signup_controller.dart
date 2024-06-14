@@ -13,19 +13,21 @@ class SignUpController extends GetxController {
   final name = TextEditingController();
   final username = TextEditingController();
   final password = TextEditingController();
-
-  //Lógicas
-  GlobalKey<FormState> signupFormKey = GlobalKey<FormState>();
   final hidePassword = true.obs;
 
+  //Lógicas
+  GlobalKey<FormState> signupFormKey = GlobalKey<FormState>();  
+  
+
+  //Método para validar el estado del formulario y crear cuenta con userRepository
   void signup() async {
     try {
       if (!signupFormKey.currentState!.validate()) return;
-
+      //Registra usuario nuevo en Firebase Authentication
       final userData = await AuthenticationRepository.instance
           .registerWithEmailAndPassword(
               email.text.trim(), password.text.trim());
-
+      //Llena un UserModel con los datos ingresados por el usuario
       final user = UserModel(
           id: userData.user!.uid,
           name: name.text.trim(),
@@ -34,6 +36,7 @@ class SignUpController extends GetxController {
           role: 'cliente',
           profilePicture: '');
 
+      //Llama a la clase repository para registrar el usuario en firestore
       final userRepository = Get.put(UserRepository());
       await userRepository.saveUserRecord(user);
       DaVinciSnackBars.success('Su usuario ha sido registrado');

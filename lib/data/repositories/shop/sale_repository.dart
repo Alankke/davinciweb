@@ -6,7 +6,8 @@ class SaleRepository {
   static SaleRepository get instance => Get.find();
 
   final FirebaseFirestore _db = FirebaseFirestore.instance;
-
+  
+  //Crear venta y guardarla en firestore
   Future<void> saveSaleRecord(SaleModel sale) async {
     try {
       await _db.collection('Sales').add(sale.toJson());
@@ -14,7 +15,7 @@ class SaleRepository {
       throw 'Hubieron problemas al intentar registrar una venta en Firestore: $error';
     }
   }
-
+    //Leer las ventas desde firestore
     Future<List<SaleModel>> getSalesFromFirestore() async {
     try {
       final querySnapshot = await _db.collection('Sales').get();

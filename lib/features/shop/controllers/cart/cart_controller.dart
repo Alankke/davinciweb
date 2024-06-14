@@ -49,7 +49,8 @@ class CartController extends GetxController with GetSingleTickerProviderStateMix
     }
     return total;
   }
-  
+
+  //Método para realizar la animación del carrito y colocar un Overlay (capa por encima de otra capa) en la pantalla actual 
   void toggleCartVisibility(BuildContext context) {
     if (cartOverlayEntry == null) {
       cartOverlayEntry = createCartOverlayEntry(context);
@@ -66,7 +67,8 @@ class CartController extends GetxController with GetSingleTickerProviderStateMix
       animationController.forward();
     }
   }
-
+  
+  //Función para crear el overlay
   OverlayEntry createCartOverlayEntry(BuildContext context) {
     return OverlayEntry(
       builder: (context) => Positioned(

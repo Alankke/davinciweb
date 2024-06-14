@@ -25,7 +25,7 @@ class CreateProductController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    // Cargar datos si el producto no es nuevo
+    //Cargar datos al formulario si el producto no es nuevo (si esta editando el producto en lugar de estar creando uno nuevo)
     if (Get.arguments != null) {
       final productToEdit = Get.arguments as ProductModel;
       product.value = productToEdit;
@@ -40,6 +40,7 @@ class CreateProductController extends GetxController {
     try {
       if (createProductKey.currentState != null &&
           createProductKey.currentState!.validate()) {
+            //Llena los datos de ProductModel con los datos ingresados por el usuario
         Map<String, dynamic> productData = {
           'Name': name.text.trim(),
           'Price': double.parse(price.text.trim()),
@@ -48,11 +49,11 @@ class CreateProductController extends GetxController {
         };
 
         if (product.value.id.isEmpty) {
-          // Crear nuevo producto
+            //Crear nuevo producto
           await productRepository.saveProductRecord(productData);
           DaVinciSnackBars.success('Producto creado con éxito');
         } else {
-          // Actualizar producto existente
+            //Actualizar producto existente
           await productRepository.updateSingleField(productData, product.value.id);
           DaVinciSnackBars.success('Producto actualizado con éxito');
         }
@@ -63,13 +64,17 @@ class CreateProductController extends GetxController {
     }
   }
 
-  //Selecciona la imagen con el paquete y actualiza la imagen actual con método.
+  //Método para seleccionar la imagen con el paquete y guardarla a firebase storage
   void selectPicture() async {
+    //Pide al usuario que seleccione una imagen
     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (image != null) {
+      //Si seleccionó una imagen se esta subiendo a storage
       isLoading.value = true;
       try {
+        //Llama a repository para registrar la imagen en storage (en la carpeta/directorio Products/)
         final imageUrl = await productRepository.uploadImage("Products/", image);
+        //Actualiza el estado del formulario para mostrar la imagen seleccionada
         product.update((val) {
           val!.picture = imageUrl;
         });

@@ -2,41 +2,37 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:davinciweb/data/repositories/shop/sale_repository.dart';
 import 'package:davinciweb/features/shop/models/sale_model.dart';
 import 'package:davinciweb/utils/constants/snackbars.dart';
+import 'package:davinciweb/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'dart:math';
 
 class CheckoutController extends GetxController {
   static CheckoutController get instance => Get.find();
 
-  // Credit Card
+  //Credit Card
   final cardNumbers = TextEditingController();
   final cardName = TextEditingController();
   final cardCvv = TextEditingController();
   final cardExpiryDate = TextEditingController();
   GlobalKey<FormState> cardKey = GlobalKey<FormState>();
 
-  // Payment Method
+  //Payment Method
   var selectedPaymentMethod = Rx<String?>(null);
 
-  // Lógicas
+  //Lógicas
   final saleRepository = Get.put(SaleRepository());
   final Rx<SaleModel> sale = SaleModel.emptySale().obs;
-  final RxString generatedCode = ''.obs; // Variable observada para el código generado
+  final RxString generatedCode = ''.obs; //Variable observada para el código generado
 
   void setSelectedPaymentMethod(String method) {
     selectedPaymentMethod.value = method;
   }
 
-  String generateSaleCode(int length) {
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
-    Random random = Random();
-    return List.generate(length, (index) => chars[random.nextInt(chars.length)]).join();
-  }
-
+  //Método para crear venta a partir de los datos de pantalla Checkout y guardarla en firestore
   void createSale(String userId, List<Map<String, dynamic>> products, double totalAmount) async {
     try {
-      String generatedCode = generateSaleCode(6);
+      //Llena un SaleModel con los datos ingresados
+      String generatedCode = DaVinciHelpersFunctions.generateSaleCode(6);
       SaleModel newSale = SaleModel(
         userId: userId,
         paymentMethod: selectedPaymentMethod.value!,
@@ -46,9 +42,9 @@ class CheckoutController extends GetxController {
         totalAmount: totalAmount,
         timestamp: Timestamp.now(),
       );
-
+      //Llama a la clase repository para registrar la venta en firestore
       await saleRepository.saveSaleRecord(newSale);
-      this.generatedCode.value = generatedCode; // Actualiza el código generado
+      this.generatedCode.value = generatedCode; //Actualiza el código generado (hasta este momento el código es vacío)
       DaVinciSnackBars.success('Su compra se ha registrado, este es su código para el retiro $generatedCode');
     } catch (e) {
       DaVinciSnackBars.error('Se ha producido un error, intente nuevamente más tarde');

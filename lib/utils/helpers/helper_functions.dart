@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:davinciweb/utils/constants/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,6 +19,12 @@ class DaVinciHelpersFunctions {
                     child: const Text('OK'))
               ]);
         });
+  }
+
+  static String generateSaleCode(int length) {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+    Random random = Random();
+    return List.generate(length, (index) => chars[random.nextInt(chars.length)]).join();
   }
 
   static Size screenSize() {

@@ -9,6 +9,7 @@ class AuthenticationRepository extends GetxController {
   final _auth = FirebaseAuth.instance;
   User? get authUser => _auth.currentUser;
 
+  //Redirige a la pantalla determinada según el rol del usuario
   @override
   void onReady() {
     super.onReady();

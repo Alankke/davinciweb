@@ -13,7 +13,7 @@ class UserRepository extends GetxController {
   final Rx<UserModel> _user = UserModel.emptyUser().obs;
   UserModel get user => _user.value;
 
-  //Función para guardar usuario en firestore
+  //Método para guardar usuario en firestore
   Future<void> saveUserRecord(UserModel user) async {
     try {
       await _db.collection("Users").doc(user.id).set(user.toJson());
@@ -22,7 +22,7 @@ class UserRepository extends GetxController {
     }
   }
 
-  //Función para traer todos los datos del usuario logueado al momento
+  //Método para traer todos los datos del usuario logueado al momento
   Future<void> fetchUserDetails() async {
     try {
       final documentSnapshot = await _db
@@ -39,7 +39,7 @@ class UserRepository extends GetxController {
     }
   }
 
-  //Función para actualizar los detalles de los usuarios
+  //Método para actualizar los detalles de los usuarios
   Future<void> updateUserDetails(UserModel targetUser) async {
     try {
       await _db
@@ -50,7 +50,7 @@ class UserRepository extends GetxController {
       throw 'Se produjo un error y no se pudo registrar en la base de datos';
     }
   }
-
+  //Actualizar un solo campo del usuario y guardarlo en firestore
   Future<void> updateSingleFields(Map<String, dynamic> json) async {
     try {
       await _db
@@ -62,7 +62,7 @@ class UserRepository extends GetxController {
     }
   }
 
-  //Función para eliminar los detalles de los usuarios
+  //Método para eliminar los detalles de los usuarios
   Future<void> deleteUserRecord(String userId) async {
     try {
       await _db.collection("Users").doc(userId).delete();
@@ -70,7 +70,7 @@ class UserRepository extends GetxController {
       throw 'Se produjo un error y no se pudo registrar en la base de datos';
     }
   }
-
+  //Función para subir foto de perfil a storage
   Future<String> uploadImage(String path, XFile image) async {
     try {
       final ref = FirebaseStorage.instance.ref(path).child(image.name);
