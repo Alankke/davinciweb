@@ -22,60 +22,83 @@ class ManageProducts extends StatelessWidget {
           if (productController.isLoading.value) {
             return const Center(child: CircularProgressIndicator());
           } else if (productController.products.isEmpty) {
-            return const Center(child: Text('No hay productos disponibles'));
+            return const AlertDialog(
+              title: Text('Advertencia', style: DaVinciTextStyles.dialogTitle),
+              content: Text('No hay productos disponibles')
+            );
+          } else {
+            return ListView.builder(
+              itemCount: productController.products.length + 1,
+              itemBuilder: (context, index) {
+                if (index == productController.products.length) {
+                  return productController.hasMoreProducts.value
+                  ? Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    child: Center(
+                      child: ElevatedButton(
+                        onPressed: () => productController.fetchMoreProducts(),
+                        child: productController.isLoading.value
+                        ? const CircularProgressIndicator()
+                        : const Text('Cargar más')
+                      ),
+                    ),
+                  )
+                  : const SizedBox.shrink();
+                } else {
+                  ProductModel product = productController.products[index];
+                  return ListTile(
+                    leading: Image.network(product.picture, width: 50, height: 50),
+                    title: Text(product.name),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(product.category),
+                        Text(DaVinciFormatter.formatCurrency(product.price))
+                      ]
+                    ),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.edit_outlined, color: DaVinciColors.primary),
+                          onPressed: () async {
+                            var result = await Get.to(() => const CreateProduct(), arguments: product);
+                            if (result != null && result) {
+                              productController.fetchInitialProducts(); // Actualiza los productos después de editar
+                            }
+                          },
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.delete_outline, color: DaVinciColors.error),
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                title: const Text('Confirmar acción', style: DaVinciTextStyles.dialogTitle),
+                                content: const Text('¿Estas seguro de que quieres eliminar el producto?'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () => Navigator.of(context).pop(),
+                                    child: const Text('Cancelar')),
+                                  TextButton(
+                                    onPressed: () async {
+                                      await productController.deleteProduct(product.id);
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: const Text('Eliminar')
+                                  )
+                                ],
+                              )
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  );
+                }
+              },
+            );
           }
-          return ListView.builder(
-            itemCount: productController.products.length,
-            itemBuilder: (context, index) {
-              ProductModel product = productController.products[index];
-              return ListTile(
-                leading: Image.network(product.picture, width: 50, height: 50),
-                title: Text(product.name),
-                subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(product.category),
-                      Text(DaVinciFormatter.formatCurrency(product.price))
-                    ]),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.edit_outlined, color: DaVinciColors.primary),
-                      onPressed: () async {
-                        var result = await Get.to(() => const CreateProduct(), arguments: product);
-                        if (result != null && result) {
-                          productController.fetchInitialProducts(); // Actualiza los productos después de editar
-                        }
-                      },
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.delete_outline,
-                          color: DaVinciColors.error),
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                            title: const Text('Confirmar acción', style: DaVinciTextStyles.dialogTitle),
-                            content: const Text('¿Estas seguro de que quieres eliminar el producto?'),
-                            actions: [
-                              TextButton(onPressed: ()=> Navigator.of(context).pop(), child: const Text('Cancelar')),
-                              TextButton(
-                                onPressed:() async {
-                                  await productController.deleteProduct(product.id);
-                                  Navigator.of(context).pop();
-                                },
-                                child: const Text('Eliminar'))
-                            ],
-                          )
-                        );
-                      },
-                    ),
-                  ],
-                ),
-              );
-            },
-          );
         },
       ),
     );
