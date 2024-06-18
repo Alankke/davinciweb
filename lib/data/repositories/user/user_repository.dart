@@ -39,6 +39,20 @@ class UserRepository extends GetxController {
     }
   }
 
+  // Método para obtener la información de un usuario por su ID
+  Future<UserModel> getUserById(String userId) async {
+    try {
+      final documentSnapshot = await _db.collection("Users").doc(userId).get();
+      if (documentSnapshot.exists) {
+        return UserModel.fromSnapshot(documentSnapshot);
+      } else {
+        return UserModel.emptyUser();
+      }
+    } catch (e) {
+      throw 'Error al obtener los datos del usuario: $e';
+    }
+  }
+
   //Método para actualizar los detalles de los usuarios
   Future<void> updateUserDetails(UserModel targetUser) async {
     try {

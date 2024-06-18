@@ -11,6 +11,7 @@ class ProductRepository extends GetxController {
 
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
+  //Create
   //Método para crear producto y guardarlo en firestore
   Future<void> saveProductRecord(Map<String, dynamic> json) async {
     try {
@@ -20,12 +21,28 @@ class ProductRepository extends GetxController {
     }
   }
 
+  //Create
+  //Función para subir la imagen a firebase storage
+  Future<String> uploadImage(String path, XFile image) async {
+    try {
+      //Obtiene la referencia de la imagen en storage
+      final ref = FirebaseStorage.instance.ref(path).child(image.name);
+      //La transforma a bytes
+      Uint8List data = await image.readAsBytes();
+      await ref.putData(data);
+      return await ref.getDownloadURL();
+    } catch (e) {
+      throw 'Hubieron errores en la subida de imagen a firestore: $e';
+    }
+  }
+
+  //Read
   //Función para leer los productos desde firestore y paginarlos con un limite
   Future<PaginatedProducts> getProductsFromFirestore(
     {int limit = 12, DocumentSnapshot? startAfter, String category = ''}) async {
     try {
         //Obtiene primero 12 productos
-      Query query = _db.collection('Products').limit(limit);
+      Query query = _db.collection("Products").limit(limit);
         //Si el usuario quiere filtrar por categoría filtra por categoría
       if (category.isNotEmpty) {
         //Realiza el filtrado de categoría
@@ -50,20 +67,7 @@ class ProductRepository extends GetxController {
     }
   }
 
-  //Función para subir la imagen a firebase storage
-  Future<String> uploadImage(String path, XFile image) async {
-    try {
-      //Obtiene la referencia de la imagen en storage
-      final ref = FirebaseStorage.instance.ref(path).child(image.name);
-      //La transforma a bytes
-      Uint8List data = await image.readAsBytes();
-      await ref.putData(data);
-      return await ref.getDownloadURL();
-    } catch (e) {
-      throw 'Hubieron errores en la subida de imagen a firestore: $e';
-    }
-  }
-
+  //Update
   //Método para actualizar un solo campo del producto y guardarlo en firestore
   Future<void> updateSingleField(
       Map<String, dynamic> json, String productId) async {
@@ -75,6 +79,7 @@ class ProductRepository extends GetxController {
     }
   }
 
+  //Delete
   //Eliminar el producto de firestore
   Future<void> deleteProduct(String productId) async {
     try {

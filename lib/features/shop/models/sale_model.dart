@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SaleModel{
   //Aca State puede ser Cancelado, Pendiente, Abonado(retirado).
+  final String id;
   String userId;
   String paymentMethod;
   String state;
@@ -11,6 +12,7 @@ class SaleModel{
   Timestamp timestamp;
 
   SaleModel({
+    required this.id,
     required this.userId,
     required this.paymentMethod,
     required this.state,
@@ -33,6 +35,7 @@ class SaleModel{
   }
 
   static SaleModel emptySale() => SaleModel(
+    id: '',
     userId: '',
     paymentMethod: '',
     state: '',
@@ -46,6 +49,7 @@ class SaleModel{
     final data = document.data()!;
     if (document.data() != null) {
       return SaleModel(
+        id: document.id,
         userId: data['UserId'] ?? '',
         paymentMethod: data['PaymentMethod'] ?? '',
         state: data['State'] ?? '',
@@ -59,15 +63,16 @@ class SaleModel{
     }
   }
 
-  factory SaleModel.fromMap(Map<String, dynamic> map) {
+  factory SaleModel.fromJson(Map<String, dynamic> json) {
     return SaleModel(
-      userId: map['UserId'],
-      paymentMethod: map['PaymentMethod'],
-      state: map['State'],
-      generatedCode: map['GeneratedCode'],
-      products: List<Map<String, dynamic>>.from(map['Products']),
-      totalAmount: map['TotalAmount'],
-      timestamp: map['Timestamp'],
+      id: json['id'],
+      userId: json['UserId'],
+      paymentMethod: json['PaymentMethod'],
+      state: json['State'],
+      generatedCode: json['GeneratedCode'],
+      products: List<Map<String, dynamic>>.from(json['Products']),
+      totalAmount: json['TotalAmount'],
+      timestamp: json['Timestamp'],
     );
   }
 }

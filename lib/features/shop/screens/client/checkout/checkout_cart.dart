@@ -1,6 +1,7 @@
 import 'package:davinciweb/data/repositories/user/user_repository.dart';
 import 'package:davinciweb/features/shop/controllers/cart/cart_controller.dart';
 import 'package:davinciweb/features/shop/controllers/cart/checkout_controller.dart';
+import 'package:davinciweb/features/shop/controllers/sale/sale_controller.dart';
 import 'package:davinciweb/features/shop/screens/client/checkout/payment_method.dart';
 import 'package:davinciweb/features/shop/screens/client/checkout/user_info.dart';
 import 'package:davinciweb/utils/constants/colors.dart';
@@ -15,6 +16,7 @@ class CheckoutCart extends StatelessWidget {
   CheckoutCart({super.key});
   final cartController = Get.find<CartController>();
   final checkoutController = Get.put(CheckoutController());
+  final saleController = Get.put(SaleController());
   final userRepository = Get.put(UserRepository());
 
   @override
@@ -45,12 +47,12 @@ class CheckoutCart extends StatelessWidget {
                   const SizedBox(height: DaVinciSizes.md),
                   // Mostrar el código generado si está disponible
                   Obx(() {
-                    if (checkoutController.generatedCode.isNotEmpty) {
+                    if (saleController.generatedCode.isNotEmpty) {
                       return Column(
                         children: [
                           const Divider(color: DaVinciColors.black, thickness: 2),
                           Text(
-                            'Código para retiro: ${checkoutController.generatedCode.value}',
+                            'Código para retiro: ${saleController.generatedCode.value}',
                             style: DaVinciTextStyles.detailsMd,
                           ),
                         ],
@@ -109,7 +111,7 @@ class CheckoutCart extends StatelessWidget {
                           onPressed: () {
                             if (checkoutController.selectedPaymentMethod.value == null) {
                               DaVinciSnackBars.warning('Debes seleccionar un método de pago antes de finalizar la compra');
-                            } else if(checkoutController.generatedCode.isEmpty){
+                            } else if(saleController.generatedCode.isEmpty){
                               final products = cartController.cartItems.map((product) => {
                                 'name': product.name,
                                 'price': product.price,

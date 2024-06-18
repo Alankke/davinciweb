@@ -64,6 +64,7 @@ class ProductController extends GetxController {
     }
   }
   
+  //Método para realizar el filtrado por categoría en Home
   void setCategory (String category){
     selectedCategory.value = category;
     fetchInitialProducts(category: category);

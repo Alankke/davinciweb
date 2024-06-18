@@ -99,7 +99,7 @@ class CreateProductForm extends StatelessWidget {
               const SizedBox(height: DaVinciSizes.spaceBtwItems),
               //Guardar producto
               ElevatedButton(
-                  onPressed: () => controller.saveProduct(),
+                  onPressed: () => controller.createProduct(),
                   child: const Text('Guardar producto'))
             ],
           ),

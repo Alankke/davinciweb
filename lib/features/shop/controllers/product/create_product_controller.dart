@@ -36,11 +36,11 @@ class CreateProductController extends GetxController {
     }
   }
 
-  void saveProduct() async {
+  void createProduct() async {
     try {
       if (createProductKey.currentState != null &&
           createProductKey.currentState!.validate()) {
-            //Llena los datos de ProductModel con los datos ingresados por el usuario
+        //Llena los datos de ProductModel con los datos ingresados por el usuario
         Map<String, dynamic> productData = {
           'Name': name.text.trim(),
           'Price': double.parse(price.text.trim()),
@@ -49,17 +49,19 @@ class CreateProductController extends GetxController {
         };
 
         if (product.value.id.isEmpty) {
-            //Crear nuevo producto
+          //Crear nuevo producto
           await productRepository.saveProductRecord(productData);
           DaVinciSnackBars.success('Producto creado con éxito');
         } else {
-            //Actualizar producto existente
-          await productRepository.updateSingleField(productData, product.value.id);
+          //Actualizar producto existente
+          await productRepository.updateSingleField(
+              productData, product.value.id);
           DaVinciSnackBars.success('Producto actualizado con éxito');
         }
       }
     } on Exception catch (e) {
-      DaVinciSnackBars.error('Se ha producido un error, intente nuevamente más tarde');
+      DaVinciSnackBars.error(
+          'Se ha producido un error, intente nuevamente más tarde');
       throw 'Se produjo un error al guardar su producto $e';
     }
   }
@@ -73,7 +75,8 @@ class CreateProductController extends GetxController {
       isLoading.value = true;
       try {
         //Llama a repository para registrar la imagen en storage (en la carpeta/directorio Products/)
-        final imageUrl = await productRepository.uploadImage("Products/", image);
+        final imageUrl =
+            await productRepository.uploadImage("Products/", image);
         //Actualiza el estado del formulario para mostrar la imagen seleccionada
         product.update((val) {
           val!.picture = imageUrl;
