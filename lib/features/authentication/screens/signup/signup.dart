@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SignUp extends StatelessWidget {
-  const SignUp({super.key});
+  final bool isAdminCreation;
+
+  const SignUp({super.key, this.isAdminCreation = false});
 
   @override
   Widget build(BuildContext context) {
@@ -17,20 +19,25 @@ class SignUp extends StatelessWidget {
         body: Center(
             child: isSmallScreen
                 //Mobile
-                ? const Column(
+                ? Column(
                     mainAxisSize: MainAxisSize.min,
-                    children: [SignUpForm(), Logo()],
+                    children: [
+                      SignUpForm(isAdminCreation: isAdminCreation),
+                      if (!isAdminCreation) const Logo(),
+                    ],
                   )
                 //Desktop
                 : Container(
                     padding: const EdgeInsets.all(32.0),
                     constraints: const BoxConstraints(maxWidth: 800),
-                    child: const Row(
+                    child: Row(
                       children: [
-                        Expanded(child: Center(child: SignUpForm())),
-                        Expanded(child: Logo())
+                        Expanded(child: Center(child: SignUpForm(isAdminCreation: isAdminCreation))),
+                        if (!isAdminCreation) const Expanded(child: Logo())
                       ],
                     ),
-                  )));
+                  )
+            )
+    );
   }
 }

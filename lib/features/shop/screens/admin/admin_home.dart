@@ -1,3 +1,4 @@
+import 'package:davinciweb/features/authentication/screens/signup/signup.dart';
 import 'package:davinciweb/features/shop/screens/admin/CRUD/manage_products.dart';
 import 'package:davinciweb/features/shop/screens/admin/CRUD/create_product.dart';
 import 'package:davinciweb/features/shop/screens/admin/CRUD/manage_sales.dart';
@@ -33,7 +34,7 @@ class AdminHome extends StatelessWidget {
                 title: const Text('Administrar productos',
                     style: DaVinciTextStyles.drawer),
                 onTap: () =>
-                    Get.to(const ManageProducts()) //Crear pantalla de lista de productos
+                    Get.to(const ManageProducts())
                 ),
             ListTile(
                 leading: const Icon(Icons.sell_outlined,
@@ -41,7 +42,14 @@ class AdminHome extends StatelessWidget {
                 title: const Text('Administrar ventas',
                     style: DaVinciTextStyles.drawer),
                 onTap: () =>
-                    Get.to(const ManageSales()) //Crear pantalla de lista de ventas
+                    Get.to(const ManageSales())
+                ),
+            ListTile(
+                leading: const Icon(Icons.person_add_alt,
+                    color: DaVinciColors.textWhite),
+                title: const Text('Crear usuario administrador',
+                    style: DaVinciTextStyles.drawer),
+                onTap: () => Get.to(() => const SignUp(isAdminCreation: true))
                 )
           ],
         ),

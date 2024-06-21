@@ -20,7 +20,7 @@ class SignUpController extends GetxController {
   
 
   //Método para validar el estado del formulario y crear cuenta con userRepository
-  void signup() async {
+  void signup({String role = 'cliente'}) async {
     try {
       if (!signupFormKey.currentState!.validate()) return;
       //Registra usuario nuevo en Firebase Authentication
@@ -33,7 +33,7 @@ class SignUpController extends GetxController {
           name: name.text.trim(),
           username: username.text.trim(),
           email: email.text.trim(),
-          role: 'cliente',
+          role: role,
           profilePicture: '');
 
       //Llama a la clase repository para registrar el usuario en firestore
@@ -44,4 +44,8 @@ class SignUpController extends GetxController {
       DaVinciSnackBars.error('Se ha producido un error, intente nuevamente más tarde');
     }
   }
+
+  void createAdminAccount() {
+  signup(role: 'admin');
+}
 }

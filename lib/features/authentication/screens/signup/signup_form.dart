@@ -6,8 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SignUpForm extends StatelessWidget {
+  final bool isAdminCreation;
   const SignUpForm({
     super.key,
+    this.isAdminCreation = false,
   });
 
   @override
@@ -80,12 +82,13 @@ class SignUpForm extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                  child: const Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Text('Registrarte'),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Text(isAdminCreation ? 'Crear cuenta de administrador' : 'Registrarte'),
                   ),
-                  onPressed: () => controller.signup()),
+                  onPressed: () => isAdminCreation ? controller.createAdminAccount() : controller.signup()),
             ),
+            if(!isAdminCreation)
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
