@@ -51,12 +51,12 @@ class SaleModel{
       return SaleModel(
         id: document.id,
         userId: data['UserId'] ?? '',
-        paymentMethod: data['PaymentMethod'] ?? '',
+        paymentMethod: data['Payment Method'] ?? '',
         state: data['State'] ?? '',
-        generatedCode: data['GeneratedCode'] ?? '',
-        products: List<Map<String, dynamic>>.from(data['Products']),
-        totalAmount: data['TotalAmount'] ?? '',
-        timestamp: data['Timestamp'] ?? Timestamp.now()
+        generatedCode: data['Code'] ?? '',
+        products: List<Map<String, dynamic>>.from(data['Products'] ?? []),
+        totalAmount: (data['Total Amount'] ?? 0).toDouble(),
+        timestamp: data['Timestamp'] ?? Timestamp.now(),
       );
     } else {
       return SaleModel.emptySale();
