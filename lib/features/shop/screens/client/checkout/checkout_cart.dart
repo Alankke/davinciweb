@@ -33,35 +33,37 @@ class CheckoutCart extends StatelessWidget {
           // Columna detalles
           Expanded(
             flex: 2,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(100, 50, 100, 0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Center(child: Text('Procesar compra', style: DaVinciTextStyles.cartInfoLg)),
-                  const Divider(color: DaVinciColors.black, thickness: 2),
-                  const SizedBox(height: DaVinciSizes.md),
-                  UserInfoSection(),
-                  const SizedBox(height: DaVinciSizes.md),
-                  const PaymentMethodSection(),
-                  const SizedBox(height: DaVinciSizes.md),
-                  // Mostrar el código generado si está disponible
-                  Obx(() {
-                    if (saleController.generatedCode.isNotEmpty) {
-                      return Column(
-                        children: [
-                          const Divider(color: DaVinciColors.black, thickness: 2),
-                          Text(
-                            'Código para retiro: ${saleController.generatedCode.value}',
-                            style: DaVinciTextStyles.detailsMd,
-                          ),
-                        ],
-                      );
-                    } else {
-                      return Container();
-                    }
-                  }),
-                ],
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(100, 50, 100, 0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Center(child: Text('Procesar compra', style: DaVinciTextStyles.cartInfoLg)),
+                    const Divider(color: DaVinciColors.black, thickness: 2),
+                    const SizedBox(height: DaVinciSizes.md),
+                    UserInfoSection(),
+                    const SizedBox(height: DaVinciSizes.md),
+                    const PaymentMethodSection(),
+                    const SizedBox(height: DaVinciSizes.md),
+                    // Mostrar el código generado si está disponible
+                    Obx(() {
+                      if (saleController.generatedCode.isNotEmpty) {
+                        return Column(
+                          children: [
+                            const Divider(color: DaVinciColors.black, thickness: 2),
+                            Text(
+                              'Código para retiro: ${saleController.generatedCode.value}',
+                              style: DaVinciTextStyles.detailsMd,
+                            ),
+                          ],
+                        );
+                      } else {
+                        return Container();
+                      }
+                    }),
+                  ],
+                ),
               ),
             ),
           ),
